@@ -4,46 +4,52 @@ using UnityEngine;
 
 public class CameraRTS : MonoBehaviour {
 
-    public float speed = 20f;
+    public float panSpeed = 20f;
+    public float scrollSpeed = 40f;
+
+    public float panBorderThickness = 10f;
+    public Vector2 panLimit;
+    public float minY = 20f;
+    public float maxY = 120f;
+
     private Vector3 dir;
-
-    // Use this for initialization
-    void Start() {
-
-    }
 
     // Update is called once per frame
     void Update() {
 
-        if (Input.GetKey("w")) {
+        Vector3 pos = transform.position;
+
+        if (Input.GetKey("w") || Input.mousePosition.y >= Screen.height - panBorderThickness) {
             dir = transform.forward;
             dir.y = 0;
 
-            transform.position += dir * speed * Time.deltaTime;
+            pos += dir * panSpeed * Time.deltaTime;
         }
-        if (Input.GetKey("d")) {
+        if (Input.GetKey("d") || Input.mousePosition.x >= Screen.width - panBorderThickness) {
             dir = transform.right;
             dir.y = 0;
 
-            transform.position += dir * speed * Time.deltaTime;
+            pos += dir * panSpeed * Time.deltaTime;
         }
-        if (Input.GetKey("s")) {
+        if (Input.GetKey("s") || Input.mousePosition.y <= panBorderThickness) {
             dir = -transform.forward;
             dir.y = 0;
 
-            transform.position += dir * speed * Time.deltaTime;
+            pos += dir * panSpeed * Time.deltaTime;
         }
-        if (Input.GetKey("a")) {
+        if (Input.GetKey("a") || Input.mousePosition.x <= panBorderThickness) {
             dir = -transform.right;
             dir.y = 0;
 
-            transform.position += dir * speed * Time.deltaTime;
+            pos += dir * panSpeed * Time.deltaTime;
         }
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) {
-            transform.position += transform.forward * speed * Time.deltaTime;
+            if(pos.y > minY)
+                pos += transform.forward * scrollSpeed * Time.deltaTime;
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0f) {
-            transform.position -= transform.forward * speed * Time.deltaTime;
+            if(pos.y < maxY)
+                pos -= transform.forward * scrollSpeed * Time.deltaTime;
         }
         if (Input.GetKey("e")) {
             transform.Rotate(Vector3.up, 1f, Space.World);
@@ -52,6 +58,10 @@ public class CameraRTS : MonoBehaviour {
             transform.Rotate(Vector3.down, 1f, Space.World);
         }
 
-        //transform.position = pos;
+        pos.x = Mathf.Clamp(pos.x, -panLimit.x, panLimit.x);
+        pos.y = Mathf.Clamp(pos.y, minY, maxY);
+        pos.z = Mathf.Clamp(pos.z, -panLimit.y, panLimit.y);
+
+        transform.position = pos;
     }
 }
