@@ -94,6 +94,11 @@ public class Grid : MonoBehaviour {
         int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
         int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
 
+        if (worldPosition.x < 0)
+            x--;
+        if (worldPosition.z < 0)
+            y--;
+
         print("Node X: " + x + ". Node Y: " + y);
 
         return grid[x, y];

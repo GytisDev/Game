@@ -27,6 +27,8 @@ public class BuildingPlacement : MonoBehaviour {
             currentBuilding.transform.position = RoundTransform(pos, grid.nodeDiameter);
 
             if (Input.GetMouseButtonDown(0)) {
+                //Vector3 Position = currentBuilding.position;
+                //if(Position.x < 0)
                 Node node = grid.NodeFromWorldPoint(currentBuilding.position);
                 data.gridPosX = node.gridX;
                 data.gridPosY = node.gridY;
