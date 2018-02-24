@@ -12,7 +12,9 @@ public class Grid : MonoBehaviour {
     public float nodeRadius;
     public LayerMask unwalkableMask;
 
-    float nodeDiameter;
+    [HideInInspector]
+    public float nodeDiameter;
+
     int gridSizeX;
     int gridSizeY;
 
@@ -40,6 +42,27 @@ public class Grid : MonoBehaviour {
                 grid[x, y] = new Node(walkable, worldPoint, x, y);
             }
         }
+    }
+
+    public bool UpdateGrid(int gridX, int gridY, int takesX, int takesY) {
+
+        if (gridX + takesX >= gridSizeX || gridX < 0 || gridY + takesY >= gridSizeY || gridY < 0)
+            return false;
+
+        for (int x = gridX; x < gridX + takesX; x++) {
+            for (int y = gridY; y < gridY + takesY; y++) {
+                if (!grid[x, y].walkable)
+                    return false;
+            }
+        }
+
+        for (int x = gridX; x < gridX + takesX; x++) {
+            for (int y = gridY; y < gridY + takesY; y++) {
+                grid[x, y].walkable = false;
+            }
+         }
+
+        return true;
     }
 
     public List<Node> GetNeighbours(Node node) {
@@ -71,6 +94,8 @@ public class Grid : MonoBehaviour {
         int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
         int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
 
+        print("Node X: " + x + ". Node Y: " + y);
+
         return grid[x, y];
     }
 
@@ -79,8 +104,6 @@ public class Grid : MonoBehaviour {
         Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
 
             if (grid != null && displayGridGizmos) {
-                Node playerNode = NodeFromWorldPoint(playerPosition.position);
-
                 foreach (Node node in grid) {
                     Gizmos.color = (node.walkable) ? Color.white : Color.red;
                     Gizmos.DrawCube(node.worldPosition, Vector3.one * (nodeDiameter - 0.1f));

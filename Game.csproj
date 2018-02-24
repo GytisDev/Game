@@ -288,10 +288,12 @@
     <Compile Include="Assets\Scripts\Terrain\Grid.cs" />
     <Compile Include="Assets\Scripts\Terrain\Heap.cs" />
     <Compile Include="Assets\Scripts\Terrain\Node.cs" />
+    <Compile Include="Assets\Scripts\Terrain\ObjectOnGrid.cs" />
     <Compile Include="Assets\Scripts\Terrain\PathFinding.cs" />
     <Compile Include="Assets\Scripts\Terrain\PathRequestManager.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
     <Compile Include="Assets\Scripts\Utilities\CameraRTS.cs" />
+    <Compile Include="Assets\Scripts\WalkingTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

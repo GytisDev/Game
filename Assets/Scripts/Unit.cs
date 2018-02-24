@@ -5,6 +5,7 @@ using UnityEngine;
 public class Unit : MonoBehaviour {
 
     public Transform target;
+    Vector3 oldTarget;
     public float speed;
 
     Vector3[] path;
@@ -12,7 +13,19 @@ public class Unit : MonoBehaviour {
     int targetIndex;
 
     private void Start() {
+        oldTarget = target.position;
         PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+    }
+
+    private void Update() {
+        
+        if(target.position != oldTarget) {
+            targetIndex = 0;
+            PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+            oldTarget = target.position;
+            
+        }
+
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccesful) {
