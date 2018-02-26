@@ -8,6 +8,7 @@ public class Unit : MonoBehaviour {
     Vector3 oldTarget;
     public float speed;
 
+
     Vector3[] path;
 
     int targetIndex;
@@ -38,7 +39,7 @@ public class Unit : MonoBehaviour {
 
     IEnumerator FollowPath() {
         Vector3 currentWaypoint = path[0];
-
+        float speedvalue;
         while (true) {
             if(transform.position == currentWaypoint) {
                 targetIndex++;
@@ -47,8 +48,11 @@ public class Unit : MonoBehaviour {
                 }
                 currentWaypoint = path[targetIndex];
             }
-
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed);
+            if (PauseMenu.GameIsPaused)
+                speedvalue = 0;
+            else
+                speedvalue = speed;
+            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speedvalue);
             yield return null;
         }
     }

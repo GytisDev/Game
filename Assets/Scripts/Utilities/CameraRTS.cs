@@ -52,10 +52,10 @@ public class CameraRTS : MonoBehaviour {
                 pos -= transform.forward * scrollSpeed * Time.deltaTime;
         }
         if (Input.GetKey("e")) {
-            transform.Rotate(Vector3.up, 1f, Space.World);
+            transform.Rotate(Vector3.up, 2f, Space.World);
         }
         if (Input.GetKey("q")) {
-            transform.Rotate(Vector3.down, 1f, Space.World);
+            transform.Rotate(Vector3.down, 2f, Space.World);
         }
 
         pos.x = Mathf.Clamp(pos.x, -panLimit.x, panLimit.x);
