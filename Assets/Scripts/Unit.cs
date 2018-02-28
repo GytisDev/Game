@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour {
 
-    public Transform target;
+    public Transform target = null;
     Vector3 oldTarget;
     public float speed;
 
@@ -14,6 +14,9 @@ public class Unit : MonoBehaviour {
     int targetIndex;
 
     private void Start() {
+        if (target == null)
+            target = transform;
+
         oldTarget = target.position;
         PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
     }
@@ -27,6 +30,22 @@ public class Unit : MonoBehaviour {
             
         }
 
+    }
+
+    public bool ArivedAtTarget(GameObject targetObject)
+    {
+        bool arived = false;
+        Grid grid = FindObjectOfType<Grid>();
+        Node targetNode = grid.NodeFromWorldPoint(targetObject.transform.position);
+        Node currentNode = grid.NodeFromWorldPoint(transform.position);
+
+        if (currentNode.gridX <= targetNode.gridX + 2 &&
+            currentNode.gridX >= targetNode.gridX - 2 &&
+            currentNode.gridY <= targetNode.gridY + 2 &&
+            currentNode.gridY >= targetNode.gridY - 2)
+            arived = true;
+
+        return arived;
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccesful) {
