@@ -15,8 +15,8 @@ public class Grid : MonoBehaviour {
     [HideInInspector]
     public float nodeDiameter;
 
-    int gridSizeX;
-    int gridSizeY;
+    public int gridSizeX;
+    public int gridSizeY;
 
     private void Awake() {
         nodeDiameter = nodeRadius * 2;

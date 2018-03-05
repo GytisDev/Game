@@ -8,9 +8,13 @@ public class CameraRTS : MonoBehaviour {
     public float scrollSpeed = 40f;
 
     public float panBorderThickness = 10f;
-    public Vector2 panLimit;
+    //public Vector4 panLimit;
+
     public float minY = 20f;
     public float maxY = 120f;
+
+    
+    //public float mapX = grid.gridSizeX * grid.nodeRadius;
 
     private Vector3 dir;
 
@@ -58,9 +62,13 @@ public class CameraRTS : MonoBehaviour {
             transform.Rotate(Vector3.down, 2f, Space.World);
         }
 
-        pos.x = Mathf.Clamp(pos.x, -panLimit.x, panLimit.x);
+        Grid grid = GameObject.FindObjectOfType<Grid>();
+        float mapX = grid.gridSizeX * grid.nodeRadius;
+        float mapY = grid.gridSizeY * grid.nodeRadius;
+
+        pos.x = Mathf.Clamp(pos.x, -mapX, mapX);
         pos.y = Mathf.Clamp(pos.y, minY, maxY);
-        pos.z = Mathf.Clamp(pos.z, -panLimit.y, panLimit.y);
+        pos.z = Mathf.Clamp(pos.z, -mapY - 5f, mapY - 5f);
 
         transform.position = pos;
     }
