@@ -41,7 +41,6 @@ public class PathFinding : MonoBehaviour {
 
                     if (currentNode == targetNode) {
                         sw.Stop();
-                        print("Path found in (ms): " + sw.ElapsedMilliseconds);
                         pathSucces = true;
 
                         break;

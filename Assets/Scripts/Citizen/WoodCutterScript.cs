@@ -25,7 +25,6 @@ public class WoodCutterScript : MonoBehaviour {
         switch (state)
         {
             case States.GoingToWorkplace:
-                Debug.Log(ArrivedAtTarget(wcc.InitialPosition).ToString());
                 if (ArrivedAtTarget(wcc.InitialPosition))
                 {
                     state = States.Available;
