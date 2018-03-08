@@ -1,0 +1,5 @@
+Library/
+*.csproj
+*.ini
+*.sln
+*.user
