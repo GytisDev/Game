@@ -25,9 +25,28 @@ public class Grid : MonoBehaviour {
         CreateGrid();
     }
 
+    //retuns number of cells in the grid
     public int MaxSize {
         get {
             return gridSizeX * gridSizeY;
+        }
+    }
+
+    //returns number of cells per row in the grid
+    public int Width
+    {
+        get
+        {
+            return gridSizeX;
+        }
+    }
+
+    //returns number of cells per column in the grid
+    public int Height
+    {
+        get
+        {
+            return gridSizeY;
         }
     }
 
@@ -99,8 +118,6 @@ public class Grid : MonoBehaviour {
         if (worldPosition.z < 0)
             y--;
 
-        print("Node X: " + x + ". Node Y: " + y);
-
         return grid[x, y];
     }
 
@@ -115,6 +132,23 @@ public class Grid : MonoBehaviour {
                 }
             }
         }
-    
+
+    //returns node position in the world
+    public Vector3 GetNodePosition(int x, int y)
+    {
+        return grid[x, y].worldPosition;
+    }
+
+    //sets cell as occupied
+    public void SetOccupied(int x, int y)
+    {
+        grid[x, y].walkable = false;
+    }
+
+    //returns is cell walkable or not
+    public bool IsWalkable(int x, int y)
+    {
+        return grid[x, y].walkable;
+    }
 
 }

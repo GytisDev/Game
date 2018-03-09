@@ -13,6 +13,11 @@ public class ObjectOnGrid : MonoBehaviour{
 
     public bool placed = false;
 
+    private void Start()
+    {
+        grid = FindObjectOfType<Grid>();
+    }
+
     private void Update() {
         
     }

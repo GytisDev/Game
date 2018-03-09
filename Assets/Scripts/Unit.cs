@@ -57,22 +57,28 @@ public class Unit : MonoBehaviour {
     }
 
     IEnumerator FollowPath() {
-        Vector3 currentWaypoint = path[0];
-        float speedvalue;
-        while (true) {
-            if(transform.position == currentWaypoint) {
-                targetIndex++;
-                if(targetIndex >= path.Length) {
-                    yield break;
+        if (path.Length > 0)
+        {
+            Vector3 currentWaypoint = path[0];
+            float speedvalue;
+            while (true)
+            {
+                if (transform.position == currentWaypoint)
+                {
+                    targetIndex++;
+                    if (targetIndex >= path.Length)
+                    {
+                        yield break;
+                    }
+                    currentWaypoint = path[targetIndex];
                 }
-                currentWaypoint = path[targetIndex];
+                if (PauseMenu.GameIsPaused)
+                    speedvalue = 0;
+                else
+                    speedvalue = speed;
+                transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speedvalue);
+                yield return null;
             }
-            if (PauseMenu.GameIsPaused)
-                speedvalue = 0;
-            else
-                speedvalue = speed;
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speedvalue);
-            yield return null;
         }
     }
 }

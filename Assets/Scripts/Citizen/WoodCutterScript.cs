@@ -26,7 +26,6 @@ public class WoodCutterScript : MonoBehaviour {
         switch (state)
         {
             case States.GoingToWorkplace:
-                Debug.Log(ArrivedAtTarget(wcc.InitialPosition).ToString());
                 if (ArrivedAtTarget(wcc.InitialPosition))
                 {
                     state = States.Available;
@@ -47,6 +46,11 @@ public class WoodCutterScript : MonoBehaviour {
                 if (ArrivedAtTarget(currenTree))
                 {
                     state = States.Working;
+                    Debug.Log("Arived");
+                }
+                else
+                {
+                    Debug.Log("Going");
                 }
                 break;
 
