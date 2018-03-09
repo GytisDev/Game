@@ -11,6 +11,7 @@ public class WoodCutterScript : MonoBehaviour {
     public int Radius = 30;
     public float ChopingTime = 3f;
     public int WoodAccumulation = 20;
+    private int WoodGained;
     float currentChopingTime = 0;
     bool hasWorkToDo = false;
     GameObject currenTree;
@@ -46,11 +47,11 @@ public class WoodCutterScript : MonoBehaviour {
                 if (ArrivedAtTarget(currenTree))
                 {
                     state = States.Working;
-                    Debug.Log("Arived");
+                    Debug.Log("Arived at tree");
                 }
                 else
                 {
-                    Debug.Log("Going");
+                    //Debug.Log("Going");
                 }
                 break;
 
@@ -61,7 +62,7 @@ public class WoodCutterScript : MonoBehaviour {
                 } else
                 {
                     TreeScript ts = currenTree.GetComponent<TreeScript>();
-                    ts.Chop(WoodAccumulation);
+                    WoodGained = ts.Chop(WoodAccumulation);
                     ts.ChopDownIfEmpty();
                     TreeChoped();
                 }
@@ -70,9 +71,9 @@ public class WoodCutterScript : MonoBehaviour {
             case States.CarryingGoods:
                 if (ArrivedAtTarget(wcc.InitialPosition))
                 {
+                    GoodsArrived();
                     state = States.Available;
                     hasWorkToDo = false;
-
                 }
                 break;
 
@@ -102,6 +103,8 @@ public class WoodCutterScript : MonoBehaviour {
         FindTree();
 
         if (currenTree == null) return;
+
+        Debug.Log("Tree found");
 
         Unit unit = citizen.GetComponent<Unit>();
         unit.target = currenTree.transform;
@@ -134,6 +137,13 @@ public class WoodCutterScript : MonoBehaviour {
                 }
             }
         }
+    }
+
+    void GoodsArrived()
+    {
+        // Here you can update resourses using
+        // WoodGained - wood gained from last trip
+        Debug.Log("Goods arrived");
     }
 
     public void ChangeState_GoingToWorkplace()
