@@ -11,6 +11,9 @@ public class WoodCutterHutController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        ObjectOnGrid oog = gameObject.GetComponent<ObjectOnGrid>();
+        if (!oog.placed) return;
+
         if (!citizenAsigned)
         {
             AsignCitizens();

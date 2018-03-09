@@ -11,6 +11,8 @@ public class ObjectOnGrid : MonoBehaviour{
 
     public int takesSpaceX, takesSpaceY;
 
+    public bool placed = false;
+
     private void Update() {
         
     }

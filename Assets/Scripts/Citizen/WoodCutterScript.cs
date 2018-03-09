@@ -10,6 +10,7 @@ public class WoodCutterScript : MonoBehaviour {
     public GameObject citizen;
     public int Radius = 30;
     public float ChopingTime = 3f;
+    public int WoodAccumulation = 20;
     float currentChopingTime = 0;
     bool hasWorkToDo = false;
     GameObject currenTree;
@@ -55,6 +56,9 @@ public class WoodCutterScript : MonoBehaviour {
                     currentChopingTime += Time.deltaTime;
                 } else
                 {
+                    TreeScript ts = currenTree.GetComponent<TreeScript>();
+                    ts.Chop(WoodAccumulation);
+                    ts.ChopDownIfEmpty();
                     TreeChoped();
                 }
                 break;
@@ -103,6 +107,7 @@ public class WoodCutterScript : MonoBehaviour {
 
     void FindTree()
     {
+        currenTree = null;
         Grid grid = FindObjectOfType<Grid>();
         Node HutNode = grid.NodeFromWorldPoint(transform.position);
         foreach (GameObject tree in GameObject.FindGameObjectsWithTag("Tree"))
@@ -112,11 +117,17 @@ public class WoodCutterScript : MonoBehaviour {
             if (treeNode.gridX <= HutNode.gridX + Radius &&
                 treeNode.gridX >= HutNode.gridX - Radius &&
                 treeNode.gridY <= HutNode.gridY + Radius &&
-                treeNode.gridY >= HutNode.gridY - Radius)
+                treeNode.gridY >= HutNode.gridY - Radius )
 
             {
-                currenTree = tree;
-                return;
+                TreeScript ts = tree.GetComponent<TreeScript>();
+                ObjectOnGrid oog = tree.GetComponent<ObjectOnGrid>();
+                if (ts.available && oog.placed)
+                {
+                    currenTree = tree;
+                    ts.available = false;
+                    return;
+                }
             }
         }
     }

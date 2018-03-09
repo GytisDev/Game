@@ -301,6 +301,7 @@
     <Compile Include="Assets\Scripts\Terrain\ObjectOnGrid.cs" />
     <Compile Include="Assets\Scripts\Terrain\PathFinding.cs" />
     <Compile Include="Assets\Scripts\Terrain\PathRequestManager.cs" />
+    <Compile Include="Assets\Scripts\TreeScript.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
     <Compile Include="Assets\Scripts\Utilities\CameraRTS.cs" />
     <Compile Include="Assets\Scripts\WalkingTest.cs" />

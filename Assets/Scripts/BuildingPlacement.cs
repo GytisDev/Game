@@ -33,9 +33,15 @@ public class BuildingPlacement : MonoBehaviour {
                 data.gridPosX = node.gridX;
                 data.gridPosY = node.gridY;
 
-                
-                if(grid.UpdateGrid(data.gridPosX, data.gridPosY, data.takesSpaceX, data.takesSpaceY))
+
+                ObjectOnGrid oog = currentBuilding.GetComponent<ObjectOnGrid>();
+                oog.placed = true;
+
+                if (grid.UpdateGrid(data.gridPosX, data.gridPosY, data.takesSpaceX, data.takesSpaceY))
                     currentBuilding = null;
+
+                //ObjectOnGrid oog = currentBuilding.GetComponent<ObjectOnGrid>();
+                //oog.placed = true;
             }
 
             if (Input.GetMouseButtonDown(1)) {
