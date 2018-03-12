@@ -52,7 +52,7 @@ public class WoodCutterScript : MonoBehaviour {
 
             case States.PathFinding:
                 if (currenTree == null)
-                    Work();
+                    ResetWork();
 
                 if (ArrivedAtTarget(currenTree))
                 {
@@ -66,7 +66,10 @@ public class WoodCutterScript : MonoBehaviour {
                 break;
 
             case States.Working:
-                if(currentChopingTime < ChopingTime)
+                if (currenTree == null)
+                    ResetWork();
+
+                if (currentChopingTime < ChopingTime)
                 {
                     currentChopingTime += Time.deltaTime;
                 } else
@@ -157,6 +160,14 @@ public class WoodCutterScript : MonoBehaviour {
 
         rm.IncreaseResources(ResourceManager.Resources.Wood, WoodGained);
 
+    }
+
+    public void ResetWork()
+    {
+        hasWorkToDo = false;
+        state = States.GoingToWorkplace;
+        Unit unit = citizen.GetComponent<Unit>();
+        unit.target = wcc.InitialPosition.transform;
     }
 
     public void ChangeState_GoingToWorkplace()
