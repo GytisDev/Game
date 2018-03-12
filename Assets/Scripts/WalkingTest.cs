@@ -20,5 +20,5 @@ public class WalkingTest : MonoBehaviour {
         if (Input.GetMouseButton(1)) {
             transform.position = hit.point;
         }
-    }
+    }          
 }

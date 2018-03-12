@@ -5,7 +5,10 @@ licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - grid: {instanceID: 0}
+  - LandBlocks: {instanceID: 0}
+  - tree: {fileID: 1782262969799848, guid: 448d9b94d06d62a439b798408dcc231c, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

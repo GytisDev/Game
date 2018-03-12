@@ -6,24 +6,31 @@ public class WoodCutterScript : MonoBehaviour {
 
     public enum States {GoingToWorkplace, Working, CarryingGoods, PathFinding, Available };
     public States state;
+    ResourceManager rm;
     public WoodCutterHutController wcc;
     public GameObject citizen;
     public int Radius = 30;
-    public float ChopingTime = 3f;
-    public int WoodAccumulation = 20;
+    public float ChopingTime = 1f;
+    public int WoodAccumulation = 40;
     private int WoodGained;
     float currentChopingTime = 0;
     bool hasWorkToDo = false;
     GameObject currenTree;
 
-    // Use this for initialization
-	void Start () {
+    Vector3 lastPos, currentPos;
 
+    // Use this for initialization
+    void Start () {
+        rm = FindObjectOfType<ResourceManager>();
+        lastPos = gameObject.transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+
         if (citizen == null) return;
+
         switch (state)
         {
             case States.GoingToWorkplace:
@@ -44,6 +51,9 @@ public class WoodCutterScript : MonoBehaviour {
                 break;
 
             case States.PathFinding:
+                if (currenTree == null)
+                    Work();
+
                 if (ArrivedAtTarget(currenTree))
                 {
                     state = States.Working;
@@ -144,6 +154,9 @@ public class WoodCutterScript : MonoBehaviour {
         // Here you can update resourses using
         // WoodGained - wood gained from last trip
         Debug.Log("Goods arrived");
+
+        rm.IncreaseResources(ResourceManager.Resources.Wood, WoodGained);
+
     }
 
     public void ChangeState_GoingToWorkplace()

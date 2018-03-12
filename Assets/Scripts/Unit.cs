@@ -7,7 +7,7 @@ public class Unit : MonoBehaviour {
     public Transform target = null;
     Vector3 oldTarget;
     public float speed;
-
+    bool pathWasNotFoundSingleTime = false;
 
     Vector3[] path;
 
@@ -26,23 +26,25 @@ public class Unit : MonoBehaviour {
         if(target.position != oldTarget) {
             targetIndex = 0;
             PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
-            oldTarget = target.position;
-            
+            oldTarget = target.position; 
         }
 
     }
 
     public bool ArivedAtTarget(GameObject targetObject)
     {
+        if (!targetObject)
+            return false;
+
         bool arived = false;
         Grid grid = FindObjectOfType<Grid>();
         Node targetNode = grid.NodeFromWorldPoint(targetObject.transform.position);
         Node currentNode = grid.NodeFromWorldPoint(transform.position);
 
-        if (currentNode.gridX <= targetNode.gridX + 2 &&
-            currentNode.gridX >= targetNode.gridX - 2 &&
-            currentNode.gridY <= targetNode.gridY + 2 &&
-            currentNode.gridY >= targetNode.gridY - 2)
+        if (currentNode.gridX <= targetNode.gridX + 2 && // + 1
+            currentNode.gridX >= targetNode.gridX - 2 && // - 1
+            currentNode.gridY <= targetNode.gridY + 2 && // + 1
+            currentNode.gridY >= targetNode.gridY - 2 ) // - 1
             arived = true;
 
         return arived;
@@ -54,9 +56,17 @@ public class Unit : MonoBehaviour {
             StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
         }
+        else {
+            pathWasNotFoundSingleTime = true;
+        }
+        if(pathWasNotFoundSingleTime){
+            PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+        }
     }
 
     IEnumerator FollowPath() {
+        targetIndex = 0;
+
         if (path.Length > 0)
         {
             Vector3 currentWaypoint = path[0];
@@ -80,5 +90,7 @@ public class Unit : MonoBehaviour {
                 yield return null;
             }
         }
+
+        pathWasNotFoundSingleTime = false;
     }
 }

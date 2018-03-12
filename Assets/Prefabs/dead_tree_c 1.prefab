@@ -111,6 +111,9 @@ MonoBehaviour:
   grid: {fileID: 0}
   gridPosX: 0
   gridPosY: 0
+  objectName: DeadTree
   takesSpaceX: 1
   takesSpaceY: 1
-  placed: 0
+  costWood: 0
+  costStone: 0
+  placed: 1

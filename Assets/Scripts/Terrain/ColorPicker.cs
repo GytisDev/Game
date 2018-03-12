@@ -13,9 +13,9 @@ public class ColorPicker : MonoBehaviour {
         rend.enabled = true;
         rend.sharedMaterial = Material[Random.Range(0, Material.Length)];
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update() {
+
+    }
 }

@@ -5,8 +5,9 @@ using UnityEngine;
 public class CitizenScript : MonoBehaviour {
 
     public bool available;
+
     // Use this for initialization
-	void Start () {
+    void Start () {
         available = true;
 	}
 	
@@ -14,4 +15,6 @@ public class CitizenScript : MonoBehaviour {
 	void Update () {
 		
 	}
+
+
 }

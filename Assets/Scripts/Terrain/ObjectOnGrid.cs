@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class ObjectOnGrid : MonoBehaviour{
 
+    [HideInInspector]
     public Grid grid;
 
     [HideInInspector]
     public int gridPosX, gridPosY;
 
+    public string objectName;
     public int takesSpaceX, takesSpaceY;
+    public int costWood, costStone;
 
     public bool placed = false;
 

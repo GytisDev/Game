@@ -6,6 +6,7 @@ public class WorldGeneration : MonoBehaviour {
 
     public Grid grid;
     public GameObject LandBlocks;
+    public GameObject tree;
 
     private int width;
     private int height;
@@ -24,14 +25,6 @@ public class WorldGeneration : MonoBehaviour {
 	void Update () {
 		
 	}
-
-    void PlaceIsland()
-    {
-        while(currentPos.y < height)
-        {
-            
-        }
-    }
 
     //generates island
     /*public void GenerateIsland()
@@ -132,6 +125,15 @@ public class WorldGeneration : MonoBehaviour {
             {
                 currentPos.y++;
                 currentPos.x = 0;
+            }
+        }
+
+        for (int x = 0; x < 30; x++) {
+            for (int y = 0; y < 30; y++) {
+                if(Random.Range(0, 10) > 8) {
+                    Instantiate(tree, new Vector3(x, 0, y), Quaternion.Euler(new Vector3(-90, 0,0)));
+
+                }
             }
         }
     }
