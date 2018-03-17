@@ -12,12 +12,22 @@ public class CameraRTS : MonoBehaviour {
 
     public float minY = 20f;
     public float maxY = 120f;
+    Quaternion originalRotation;
 
-    
     //public float mapX = grid.gridSizeX * grid.nodeRadius;
 
     private Vector3 dir;
+    //reset rotation
+    void Start()
+    {
+        originalRotation = transform.rotation;
+    }
 
+    public void ResetRotation()
+    {
+        transform.rotation = originalRotation;
+
+    }
     // Update is called once per frame
     void Update() {
 

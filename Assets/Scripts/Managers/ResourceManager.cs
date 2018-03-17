@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResourceManager : MonoBehaviour {
 
     private string resourcesFormat;
+    public Text woodtext;
+    public Text stonetext;
+    public Text foodtext;
 
     public enum Resources {
         Wood,
@@ -21,8 +25,11 @@ public class ResourceManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        woodtext.text = wood.ToString();
+        stonetext.text = stone.ToString();
+        foodtext.text = food.ToString();
+
+    }
 
     public void IncreaseResources(Resources resource, int amount) {
         AlterResources(resource, amount);
@@ -53,13 +60,14 @@ public class ResourceManager : MonoBehaviour {
 
         UpdateFormat();
     }
-
+    
     private void UpdateFormat() {
         resourcesFormat = "Wood: " + wood + " Stone: " + stone + " Food: " + food;
-    }
 
+    }
+    /*
     private void OnGUI() {
         GUI.skin.box.fontSize = 18;
         GUI.Box(new Rect(10, 10, 250, 25), resourcesFormat);
-    }
+    }*/
 }

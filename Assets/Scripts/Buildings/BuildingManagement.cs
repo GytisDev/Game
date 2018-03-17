@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuildingManagement : MonoBehaviour {
 
@@ -17,12 +18,11 @@ public class BuildingManagement : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
     }
 
     private void OnGUI() {
         for (int i = 0; i < buildings.Length; i++) {
-            if (GUI.Button(new Rect(20, 50 + i * 40, 100, 30), buildings[i].name)) {
+            if (GUI.Button(new Rect(20, 100 + i * 40, 100, 30), buildings[i].name)) {
                 ObjectOnGrid ong = buildings[i].GetComponent<ObjectOnGrid>();
 
                 if(rm.isEnough(ong.costWood, ong.costStone, 0))
