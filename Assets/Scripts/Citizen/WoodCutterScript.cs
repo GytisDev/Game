@@ -113,7 +113,8 @@ public class WoodCutterScript : MonoBehaviour {
 
     public void Work()
     {
-        FindTree();
+        //FindTree();
+        FindNearestTree();
 
         if (currenTree == null) return;
 
@@ -149,6 +150,46 @@ public class WoodCutterScript : MonoBehaviour {
                     return;
                 }
             }
+        }
+    }
+
+    void FindNearestTree()
+    {
+        currenTree = null;
+        float dist = float.MaxValue;
+        Grid grid = FindObjectOfType<Grid>();
+        Node HutNode = grid.NodeFromWorldPoint(transform.position);
+        foreach (GameObject tree in GameObject.FindGameObjectsWithTag("Tree"))
+        {
+            Node treeNode = grid.NodeFromWorldPoint(tree.transform.position);
+
+            if (treeNode.gridX <= HutNode.gridX + Radius &&
+                treeNode.gridX >= HutNode.gridX - Radius &&
+                treeNode.gridY <= HutNode.gridY + Radius &&
+                treeNode.gridY >= HutNode.gridY - Radius)
+
+            {
+                TreeScript ts = tree.GetComponent<TreeScript>();
+                ObjectOnGrid oog = tree.GetComponent<ObjectOnGrid>();
+                if (ts.available && oog.placed)
+                {
+                    float currTreeDist = Mathf.Sqrt(Mathf.Pow(treeNode.gridX - HutNode.gridX, 2) + 
+                                                  Mathf.Pow(treeNode.gridY - HutNode.gridY, 2));
+                    if (currTreeDist < dist)
+                    {
+                        currenTree = tree;
+                        dist = currTreeDist;
+                    }
+                    //ts.available = false;
+                    //return;
+                }
+            }
+        }
+
+        if (currenTree != null)
+        {
+            TreeScript ts = currenTree.GetComponent<TreeScript>();
+            ts.available = false;
         }
     }
 
