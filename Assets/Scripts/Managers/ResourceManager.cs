@@ -13,10 +13,11 @@ public class ResourceManager : MonoBehaviour {
     public enum Resources {
         Wood,
         Food, 
-        Stone
+        Stone,
+        Storage
     }
 
-    public int wood, food, stone;
+    public int wood, food, stone, storage;
 
 	// Use this for initialization
 	void Start () {
@@ -25,9 +26,9 @@ public class ResourceManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        woodtext.text = wood.ToString();
-        stonetext.text = stone.ToString();
-        foodtext.text = food.ToString();
+        woodtext.text = wood.ToString() + "\n/" + storage.ToString();
+        stonetext.text = stone.ToString() + "\n/" + storage.ToString();
+        foodtext.text = food.ToString() + "\n/" + storage.ToString();
 
     }
 
@@ -53,6 +54,9 @@ public class ResourceManager : MonoBehaviour {
                 break;
             case Resources.Stone:
                 stone += amount;
+                break;
+            case Resources.Storage:
+                storage += amount;
                 break;
             default:
                 return;

@@ -9,12 +9,14 @@ public class UIToggle : MonoBehaviour
     public GameObject Minimap;
     bool isRstOn;
     public GameObject ResourceTab;
+    public GameObject populationtab;
 
     void Start()
     {
         Minimap.SetActive(AllToggle);
         isMMOn = AllToggle;
         ResourceTab.SetActive(AllToggle);
+        populationtab.SetActive(AllToggle);
         isRstOn = AllToggle;
     }
 
@@ -31,12 +33,14 @@ public class UIToggle : MonoBehaviour
             if (isRstOn == true)
             {
                 ResourceTab.SetActive(false);
+                populationtab.SetActive(false);
                 isRstOn = false;
             }
 
             else
             {
                 ResourceTab.SetActive(true);
+                populationtab.SetActive(true);
                 isRstOn = true;
             }
         }

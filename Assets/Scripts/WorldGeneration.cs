@@ -128,8 +128,8 @@ public class WorldGeneration : MonoBehaviour {
             }
         }
 
-        for (int x = 0; x < 30; x++) {
-            for (int y = 0; y < 30; y++) {
+        for (int x = -35; x < 35; x++) {
+            for (int y = -35; y < 35; y++) {
                 if(Random.Range(0, 10) > 8) {
                     Instantiate(tree, new Vector3(x, 0, y), Quaternion.Euler(new Vector3(-90, 0,0)));
 

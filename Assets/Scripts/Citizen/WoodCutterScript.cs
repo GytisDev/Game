@@ -113,17 +113,20 @@ public class WoodCutterScript : MonoBehaviour {
 
     public void Work()
     {
-        //FindTree();
-        FindNearestTree();
+        if (rm.wood < rm.storage)
+        {
+            //FindTree();
+            FindNearestTree();
 
-        if (currenTree == null) return;
+            if (currenTree == null) return;
 
-        Debug.Log("Tree found");
+            Debug.Log("Tree found");
 
-        Unit unit = citizen.GetComponent<Unit>();
-        unit.target = currenTree.transform;
-        hasWorkToDo = true;
-        state = States.PathFinding;
+            Unit unit = citizen.GetComponent<Unit>();
+            unit.target = currenTree.transform;
+            hasWorkToDo = true;
+            state = States.PathFinding;
+        }
     }
 
     void FindTree()
