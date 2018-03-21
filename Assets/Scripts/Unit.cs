@@ -1,96 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Unit : MonoBehaviour {
 
-    public Transform target = null;
-    Vector3 oldTarget;
-    public float speed;
-    bool pathWasNotFoundSingleTime = false;
+    private NavMeshAgent agent;
 
-    Vector3[] path;
-
-    int targetIndex;
-
-    private void Start() {
-        if (target == null)
-            target = transform;
-
-        oldTarget = target.position;
-        PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+    // Use this for initialization
+    void Start() {
+        agent = GetComponent<NavMeshAgent>();
     }
 
-    private void Update() {
-        
-        if(target.position != oldTarget) {
-            targetIndex = 0;
-            PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
-            oldTarget = target.position; 
-        }
-
+    // Update is called once per frame
+    void Update() {
     }
 
-    public bool ArivedAtTarget(GameObject targetObject)
-    {
-        if (!targetObject)
-            return false;
-
-        bool arived = false;
-        Grid grid = FindObjectOfType<Grid>();
-        Node targetNode = grid.NodeFromWorldPoint(targetObject.transform.position);
-        Node currentNode = grid.NodeFromWorldPoint(transform.position);
-
-        if (currentNode.gridX <= targetNode.gridX + 2 && // + 1
-            currentNode.gridX >= targetNode.gridX - 2 && // - 1
-            currentNode.gridY <= targetNode.gridY + 2 && // + 1
-            currentNode.gridY >= targetNode.gridY - 2 ) // - 1
-            arived = true;
-
-        return arived;
+    public void MoveTo(Vector3 position) {
+        agent.destination = position;
     }
 
-    public void OnPathFound(Vector3[] newPath, bool pathSuccesful) {
-        if (pathSuccesful) {
-            path = newPath;
-            StopCoroutine("FollowPath");
-            StartCoroutine("FollowPath");
-        }
-        else {
-            pathWasNotFoundSingleTime = true;
-        }
-        if(pathWasNotFoundSingleTime){
-            PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
-        }
-    }
-
-    IEnumerator FollowPath() {
-        targetIndex = 0;
-
-        if (path.Length > 0)
-        {
-            Vector3 currentWaypoint = path[0];
-            float speedvalue;
-            while (true)
-            {
-                if (transform.position == currentWaypoint)
-                {
-                    targetIndex++;
-                    if (targetIndex >= path.Length)
-                    {
-                        yield break;
-                    }
-                    currentWaypoint = path[targetIndex];
+    public bool ArrivedAtTarget() {
+        if (!agent.pathPending) {
+            if (agent.remainingDistance <= agent.stoppingDistance) {
+                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f) {
+                    return true;
                 }
-                if (PauseMenu.GameIsPaused)
-                    speedvalue = 0;
-                else
-                    speedvalue = speed;
-                transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speedvalue);
-                yield return null;
             }
         }
 
-        pathWasNotFoundSingleTime = false;
+        return false;
     }
 }

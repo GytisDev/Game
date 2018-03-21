@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class WoodCutterScript : MonoBehaviour {
 
@@ -11,11 +12,12 @@ public class WoodCutterScript : MonoBehaviour {
     public GameObject citizen;
     public int Radius = 30;
     public float ChopingTime = 1f;
-    public int WoodAccumulation = 40;
+    public int WoodAccumulation = 10;
     private int WoodGained;
     float currentChopingTime = 0;
     bool hasWorkToDo = false;
     GameObject currenTree;
+    Unit unit;
 
     Vector3 lastPos, currentPos;
 
@@ -23,6 +25,7 @@ public class WoodCutterScript : MonoBehaviour {
     void Start () {
         rm = FindObjectOfType<ResourceManager>();
         lastPos = gameObject.transform.position;
+        unit = GetComponent<Unit>();
 	}
 	
 	// Update is called once per frame
@@ -34,7 +37,7 @@ public class WoodCutterScript : MonoBehaviour {
         switch (state)
         {
             case States.GoingToWorkplace:
-                if (ArrivedAtTarget(wcc.InitialPosition))
+                if (ArrivedAtTarget())
                 {
                     state = States.Available;
                 }
@@ -54,7 +57,7 @@ public class WoodCutterScript : MonoBehaviour {
                 if (currenTree == null)
                     ResetWork();
 
-                if (ArrivedAtTarget(currenTree))
+                if (ArrivedAtTarget())
                 {
                     state = States.Working;
                     Debug.Log("Arived at tree");
@@ -82,7 +85,7 @@ public class WoodCutterScript : MonoBehaviour {
                 break;
 
             case States.CarryingGoods:
-                if (ArrivedAtTarget(wcc.InitialPosition))
+                if (ArrivedAtTarget())
                 {
                     GoodsArrived();
                     state = States.Available;
@@ -102,13 +105,12 @@ public class WoodCutterScript : MonoBehaviour {
         currentChopingTime = 0f;
         state = States.CarryingGoods;
 
-        Unit unit = citizen.GetComponent<Unit>();
-        unit.target = wcc.InitialPosition.transform;
+        unit.MoveTo(wcc.InitialPosition.transform.position);
     }
 
-    public bool ArrivedAtTarget(GameObject targetObject)
+    public bool ArrivedAtTarget()
     {
-        return citizen.GetComponent<Unit>().ArivedAtTarget(targetObject);
+        return unit.ArrivedAtTarget();
     }
 
     public void Work()
@@ -122,8 +124,7 @@ public class WoodCutterScript : MonoBehaviour {
 
             Debug.Log("Tree found");
 
-            Unit unit = citizen.GetComponent<Unit>();
-            unit.target = currenTree.transform;
+            unit.MoveTo(currenTree.transform.position);
             hasWorkToDo = true;
             state = States.PathFinding;
         }
@@ -210,8 +211,7 @@ public class WoodCutterScript : MonoBehaviour {
     {
         hasWorkToDo = false;
         state = States.GoingToWorkplace;
-        Unit unit = citizen.GetComponent<Unit>();
-        unit.target = wcc.InitialPosition.transform;
+        unit.MoveTo(wcc.InitialPosition.transform.position);
     }
 
     public void ChangeState_GoingToWorkplace()

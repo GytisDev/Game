@@ -7,13 +7,14 @@ public class WorldGeneration : MonoBehaviour {
     public Grid grid;
     public GameObject LandBlocks;
     public GameObject tree;
+    public Transform parent;
 
     private int width;
     private int height;
     private Vector3Int currentPos;
         
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         width = grid.Width;
         height = grid.Height;
 
@@ -118,7 +119,7 @@ public class WorldGeneration : MonoBehaviour {
         {
             if (grid.IsWalkable(currentPos.x, currentPos.y))
             {
-                Instantiate(LandBlocks, grid.GetNodePosition(currentPos.x, currentPos.y), Quaternion.identity);
+                Instantiate(LandBlocks, grid.GetNodePosition(currentPos.x, currentPos.y), Quaternion.identity, parent);
             }
             currentPos.x++;
             if(currentPos.x == width)

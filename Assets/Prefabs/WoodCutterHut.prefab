@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 23242570035086816}
   - component: {fileID: 114473659110052608}
   - component: {fileID: 114360500296419020}
+  - component: {fileID: 208465673030209348}
   m_Layer: 8
   m_Name: WoodCutterHut
   m_TagString: Untagged
@@ -152,3 +153,18 @@ MonoBehaviour:
   costWood: 50
   costStone: 0
   placed: 0
+--- !u!208 &208465673030209348
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1951810263286766}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 3.515, y: 2.549, z: 1.9330001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.989, y: -0.043, z: 1.9330001}
+  m_TimeToStationary: 0.5

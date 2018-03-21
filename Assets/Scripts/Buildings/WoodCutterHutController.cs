@@ -42,7 +42,7 @@ public class WoodCutterHutController : MonoBehaviour {
 
                     // Citizen goes to his workplace
                     Unit unit = citizen.GetComponent<Unit>();
-                    unit.target = InitialPosition.transform;
+                    unit.MoveTo(InitialPosition.transform.position);
                 }
             }
         }
