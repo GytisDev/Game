@@ -145,6 +145,12 @@ public class Grid : MonoBehaviour {
         grid[x, y].walkable = false;
     }
 
+	//sets cell as walkable
+	public void SetWalkable(int x, int y)
+	{
+		grid[x, y].walkable = true;
+	}
+
     //returns is cell walkable or not
     public bool IsWalkable(int x, int y)
     {

@@ -12,6 +12,28 @@ public class WorldGeneration : MonoBehaviour {
     private int width;
     private int height;
     private Vector3Int currentPos;
+
+	public float noiseScale;
+
+	public int octaves;
+	[Range(0,1)]
+	public float persistance;
+	public float lacunarity;
+
+	public int seed;
+	public Vector2 offset;
+
+	public bool autoUpdate;
+
+	public TerrainType[] regions;
+	public GameObject[,] Objects;
+
+	[System.Serializable]
+	public struct TerrainType {
+		public string name;
+		public Vector2 height;
+		public GameObject gObject;
+	}
         
 	// Use this for initialization
 	void Awake () {
@@ -19,7 +41,6 @@ public class WorldGeneration : MonoBehaviour {
         height = grid.Height;
 
         GenerateIsland();
-        CreateLand();
 	}
 	
 	// Update is called once per frame
@@ -77,36 +98,31 @@ public class WorldGeneration : MonoBehaviour {
     //generates island
     void GenerateIsland()
     {
-        int n;
-        for (int i = 0; i < width; i++)
-        {
-            n = Random.Range(3, 6);
-            for (int j = 0; j < n; j++)
-            {
-                grid.SetOccupied(i, j);
-            }
+		float[,] noiseMap = Noise.GenerateNoiseMap (width, height, seed, noiseScale, octaves, persistance, lacunarity, offset);
 
-            n = Random.Range(4, 7);
-            for (int j = 1; j < n; j++)
-            {
-                grid.SetOccupied(i, height-j);
-            }
-        }
+		Objects = new GameObject [width, height];
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				
+				float currentHeight = noiseMap [x, y];
 
-        for(int i = 0; i < height; i++)
-        {
-            n = Random.Range(3, 6);
-            for (int j = 0; j < n; j++)
-            {
-                grid.SetOccupied(j, i);
-            }
+				for (int i = 0; i < regions.Length; i++) {
+					if (currentHeight >= regions [i].height.x && currentHeight <= regions [i].height.y) {
+						Objects [x, y] = regions [i].gObject;
+						break;
+					}
+				}
+			}
+		}
 
-            n = Random.Range(4, 7);
-            for (int j = 1; j < n; j++)
-            {
-                grid.SetOccupied(width - j, i);
-            }
-        }
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				if (Objects [x, y] != null) {
+					Instantiate (LandBlocks, grid.GetNodePosition (x, y), Quaternion.identity, parent);
+					grid.SetWalkable(x, y);
+				}
+			}
+		}
     }
 
     //Create land
