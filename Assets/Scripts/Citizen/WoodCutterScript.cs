@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class WoodCutterScript : MonoBehaviour {
 
@@ -10,12 +9,15 @@ public class WoodCutterScript : MonoBehaviour {
     ResourceManager rm;
     public WoodCutterHutController wcc;
     public GameObject citizen;
-    public int Radius = 30;
-    public float ChopingTime = 1f;
-    public int WoodAccumulation = 10;
+    public int Radius = 3;
+    public int WoodAccumulation = 40;
     private int WoodGained;
-    float currentChopingTime = 0;
+    public float ChopingTime = 1f;
+    float currentChopingTime = 0f;
+    public float FindingTime = 2f;
+    float currentFindingTime = 0f;
     bool hasWorkToDo = false;
+    bool noTreesInArea = false;
     GameObject currenTree;
     Unit unit;
 
@@ -37,19 +39,28 @@ public class WoodCutterScript : MonoBehaviour {
         switch (state)
         {
             case States.GoingToWorkplace:
-                if (ArrivedAtTarget())
+                if (ArrivedAtTarget(wcc.InitialPosition))
                 {
                     state = States.Available;
                 }
                 break;
 
             case States.Available:
-                if (!hasWorkToDo)
-                {
+                //if (rm.noTrees) return;
+                //if (!hasWorkToDo)
+                //{
+                //    Work();
+                //}
+                if (hasWorkToDo) return;
+                if (!noTreesInArea)
                     Work();
-                } else
-                {
-
+                else {
+                    if (currentFindingTime < FindingTime)
+                        currentFindingTime += Time.deltaTime;
+                    else {
+                        currentFindingTime = 0f;
+                        Work();
+                    }
                 }
                 break;
 
@@ -57,7 +68,7 @@ public class WoodCutterScript : MonoBehaviour {
                 if (currenTree == null)
                     ResetWork();
 
-                if (ArrivedAtTarget())
+                if (ArrivedAtTarget(currenTree))
                 {
                     state = States.Working;
                     Debug.Log("Arived at tree");
@@ -85,7 +96,7 @@ public class WoodCutterScript : MonoBehaviour {
                 break;
 
             case States.CarryingGoods:
-                if (ArrivedAtTarget())
+                if (ArrivedAtTarget(wcc.InitialPosition))
                 {
                     GoodsArrived();
                     state = States.Available;
@@ -108,7 +119,7 @@ public class WoodCutterScript : MonoBehaviour {
         unit.MoveTo(wcc.InitialPosition.transform.position);
     }
 
-    public bool ArrivedAtTarget()
+    public bool ArrivedAtTarget(GameObject targetObject)
     {
         return unit.ArrivedAtTarget();
     }
@@ -120,9 +131,12 @@ public class WoodCutterScript : MonoBehaviour {
             //FindTree();
             FindNearestTree();
 
-            if (currenTree == null) return;
-
-            Debug.Log("Tree found");
+            if (currenTree == null)
+            {
+                //rm.noTrees = true;
+                noTreesInArea = true;
+                return;
+            }
 
             unit.MoveTo(currenTree.transform.position);
             hasWorkToDo = true;
