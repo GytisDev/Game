@@ -11,7 +11,6 @@ public class WorldGeneration : MonoBehaviour {
 
     private int width;
     private int height;
-    private Vector3Int currentPos;
 
 	public float noiseScale;
 
@@ -24,6 +23,9 @@ public class WorldGeneration : MonoBehaviour {
 	public Vector2 offset;
 
 	public bool autoUpdate;
+
+	public Vector2Int ForestNumber;
+	public Vector2Int TreesPerForest;
 
 	public TerrainType[] regions;
 	public GameObject[,] Objects;
@@ -45,6 +47,7 @@ public class WorldGeneration : MonoBehaviour {
         height = grid.Height;
 
         GenerateIsland();
+		GenerateForests (Random.Range(ForestNumber.x, ForestNumber.y), TreesPerForest.x, TreesPerForest.y);
 	}
 	
 	// Update is called once per frame
@@ -52,12 +55,26 @@ public class WorldGeneration : MonoBehaviour {
 		
 	}
 
-    //generates island
-    /*public void GenerateIsland()
-    {
-        currentPos.x = Mathf.RoundToInt(width / 2);
-        currentPos.y = Mathf.RoundToInt(height / 2);
+	//Gnerates Multiple forests
+	public void GenerateForests(int n, int minTrees, int MaxTrees)
+	{
+		Vector2Int CurrentPos = new Vector2Int();
+		CurrentPos.x = Random.Range (0, width);
+		CurrentPos.y = Random.Range (0, height);
 
+		while(grid.IsWalkable(CurrentPos.x, CurrentPos.y)){
+			CurrentPos.x = Random.Range (0, width);
+			CurrentPos.y = Random.Range (0, height);
+		}
+
+		for (int i = 0; i < n; i++) {
+			GenerateTrees (Random.Range(minTrees, MaxTrees), CurrentPos);
+		}
+	}
+
+    //Generates One forest
+	public void GenerateTrees(int size, Vector2Int currentPos)
+    {
         int n = 0;
         int move = 0;
 
@@ -66,6 +83,7 @@ public class WorldGeneration : MonoBehaviour {
             if (grid.IsWalkable(currentPos.x, currentPos.y))
             {
                 grid.SetOccupied(currentPos.x, currentPos.y);
+				Instantiate(tree, grid.GetNodePosition (currentPos.x, currentPos.y), Quaternion.Euler(new Vector3(-90, 0,0)));
                 n++;
             }
             move = Random.Range(0, 4);
@@ -73,31 +91,31 @@ public class WorldGeneration : MonoBehaviour {
             {
                 //////////////--up--///////////////////
                 case 0:
-                    if (currentPos.y + 1 <= height)
+                    if (currentPos.y + 1 < height)
                         currentPos.y++;
                     else move++;
                     break;
                 //////////////--left--/////////////////
                 case 1:
-                    if (currentPos.x - 1 >= 0)
+                    if (currentPos.x - 1 > 0)
                         currentPos.x--;
                     else move++;
                     break;
                 //////////////--down--/////////////////
                 case 2:
-                    if (currentPos.y - 1 >= 0)
+                    if (currentPos.y - 1 > 0)
                         currentPos.y--;
                     else move++;
                     break;
                 //////////////--right--////////////////
                 case 3:
-                    if (currentPos.x + 1 <= width)
+                    if (currentPos.x + 1 < width)
                         currentPos.x++;
                     else move = 0;
                     break;
             }
         }
-    }*/
+    }
 
     //generates island
     void GenerateIsland()
@@ -133,30 +151,6 @@ public class WorldGeneration : MonoBehaviour {
     //Create land
     void CreateLand()
     {
-        currentPos.x = 0;
-        currentPos.y = 0;
 
-        while (currentPos.y < height)
-        {
-            if (grid.IsWalkable(currentPos.x, currentPos.y))
-            {
-                Instantiate(LandBlocks, grid.GetNodePosition(currentPos.x, currentPos.y), Quaternion.identity, parent);
-            }
-            currentPos.x++;
-            if(currentPos.x == width)
-            {
-                currentPos.y++;
-                currentPos.x = 0;
-            }
-        }
-
-        for (int x = -35; x < 35; x++) {
-            for (int y = -35; y < 35; y++) {
-                if(Random.Range(0, 10) > 8) {
-                    Instantiate(tree, new Vector3(x, 0, y), Quaternion.Euler(new Vector3(-90, 0,0)));
-
-                }
-            }
-        }
     }
 }
