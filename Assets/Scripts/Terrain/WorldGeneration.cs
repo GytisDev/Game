@@ -24,11 +24,12 @@ public class WorldGeneration : MonoBehaviour {
 
 	public bool autoUpdate;
 
-	public Vector2Int ForestNumber;
+	public Vector2 ForestsHeights;
 	public Vector2Int TreesPerForest;
 
 	public TerrainType[] regions;
 	public GameObject[,] Objects;
+	public GameObject[,] Trees;
 
     float[,] fallOff;
 
@@ -42,95 +43,42 @@ public class WorldGeneration : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         fallOff = FallOffGenerator.Generate(grid.gridSizeX);
+		seed = Random.Range(100, 999);
 
         width = grid.Width;
         height = grid.Height;
 
         GenerateIsland();
-		GenerateForests (Random.Range(ForestNumber.x, ForestNumber.y), TreesPerForest.x, TreesPerForest.y);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
-
-	//Gnerates Multiple forests
-	public void GenerateForests(int n, int minTrees, int MaxTrees)
-	{
-		Vector2Int CurrentPos = new Vector2Int();
-		CurrentPos.x = Random.Range (0, width);
-		CurrentPos.y = Random.Range (0, height);
-
-		while(grid.IsWalkable(CurrentPos.x, CurrentPos.y)){
-			CurrentPos.x = Random.Range (0, width);
-			CurrentPos.y = Random.Range (0, height);
-		}
-
-		for (int i = 0; i < n; i++) {
-			GenerateTrees (Random.Range(minTrees, MaxTrees), CurrentPos);
-		}
-	}
-
-    //Generates One forest
-	public void GenerateTrees(int size, Vector2Int currentPos)
-    {
-        int n = 0;
-        int move = 0;
-
-        while(n < size)
-        {
-            if (grid.IsWalkable(currentPos.x, currentPos.y))
-            {
-                grid.SetOccupied(currentPos.x, currentPos.y);
-				Instantiate(tree, grid.GetNodePosition (currentPos.x, currentPos.y), Quaternion.Euler(new Vector3(-90, 0,0)));
-                n++;
-            }
-            move = Random.Range(0, 4);
-            switch (move)
-            {
-                //////////////--up--///////////////////
-                case 0:
-                    if (currentPos.y + 1 < height)
-                        currentPos.y++;
-                    else move++;
-                    break;
-                //////////////--left--/////////////////
-                case 1:
-                    if (currentPos.x - 1 > 0)
-                        currentPos.x--;
-                    else move++;
-                    break;
-                //////////////--down--/////////////////
-                case 2:
-                    if (currentPos.y - 1 > 0)
-                        currentPos.y--;
-                    else move++;
-                    break;
-                //////////////--right--////////////////
-                case 3:
-                    if (currentPos.x + 1 < width)
-                        currentPos.x++;
-                    else move = 0;
-                    break;
-            }
-        }
-    }
+		
 
     //generates island
     void GenerateIsland()
     {
-		float[,] noiseMap = Noise.GenerateNoiseMap (width, height, seed, noiseScale, octaves, persistance, lacunarity, offset);
+		float[,] WorldNoiseMap = Noise.GenerateNoiseMap (width, height, seed, noiseScale, octaves, persistance, lacunarity, offset);
+		float[,] ForestsNoiseMap = Noise.GenerateNoiseMap (width, height, seed+1, noiseScale, octaves, persistance, lacunarity, offset);
 
 		Objects = new GameObject [width, height];
+		Trees = new GameObject[width, height];
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
 
-                noiseMap[x, y] -= fallOff[x, y];
-				float currentHeight = noiseMap [x, y];
+				WorldNoiseMap[x, y] -= fallOff[x, y];
+				float worldCurrentHeight = WorldNoiseMap [x, y];
+				float forestCurrentHeight = ForestsNoiseMap [x, y];
+
+				if (forestCurrentHeight >= ForestsHeights.x && forestCurrentHeight <= ForestsHeights.y) {
+					if(Random.Range(1, 10) > 2)
+						Trees [x, y] = tree;
+				}
 
 				for (int i = 0; i < regions.Length; i++) {
-					if (currentHeight >= regions [i].height.x && currentHeight <= regions [i].height.y) {
+					if (worldCurrentHeight >= regions [i].height.x && worldCurrentHeight <= regions [i].height.y) {
 						Objects [x, y] = regions [i].gObject;
 						break;
 					}
@@ -138,14 +86,26 @@ public class WorldGeneration : MonoBehaviour {
 			}
 		}
 
+		//Generator
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
+				//Creates land blocks
 				if (Objects [x, y] != null) {
-					Instantiate (LandBlocks, grid.GetNodePosition (x, y), Quaternion.identity, parent);
+					Instantiate (Objects[x, y], grid.GetNodePosition (x, y), Quaternion.identity, parent);
 					grid.SetWalkable(x, y);
+				}
+
+				//Creates trees
+				if (Trees [x, y] != null) {
+					if (grid.IsWalkable (x, y)) 
+					{
+						Instantiate(Trees[x, y], grid.GetNodePosition (x, y), Quaternion.Euler(new Vector3(-90, 0,0)), parent);
+						grid.SetOccupied (x, y);
+					}
 				}
 			}
 		}
+
     }
 
     //Create land
