@@ -65,18 +65,21 @@ public class Grid : MonoBehaviour {
 
     public bool UpdateGrid(int gridX, int gridY, int takesX, int takesY) {
 
-        if (gridX + takesX >= gridSizeX || gridX < 0 || gridY + takesY >= gridSizeY || gridY < 0)
+        int subX = takesX / 2 - (takesX + 1) % 2;
+        int subY = takesY / 2 - (takesY + 1) % 2;
+
+        if (gridX - subX + takesX >= gridSizeX || gridX - subX < 0 || gridY - subY + takesY >= gridSizeY || gridY - subY < 0)
             return false;
 
-        for (int x = gridX; x < gridX + takesX; x++) {
-            for (int y = gridY; y < gridY + takesY; y++) {
+        for (int x = gridX - subX; x < gridX - subX + takesX; x++) {
+            for (int y = gridY - subY; y < gridY - subY + takesY; y++) {
                 if (!grid[x, y].walkable)
                     return false;
             }
         }
 
-        for (int x = gridX; x < gridX + takesX; x++) {
-            for (int y = gridY; y < gridY + takesY; y++) {
+        for (int x = gridX - subX; x < gridX -subX + takesX; x++) {
+            for (int y = gridY - subY; y < gridY - subY + takesY; y++) {
                 grid[x, y].walkable = false;
             }
          }
@@ -127,9 +130,12 @@ public class Grid : MonoBehaviour {
 
             if (grid != null && displayGridGizmos) {
                 foreach (Node node in grid) {
+                    
                     Gizmos.color = (node.walkable) ? Color.white : Color.red;
+
                     Gizmos.DrawCube(node.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
                 }
+                
             }
         }
 

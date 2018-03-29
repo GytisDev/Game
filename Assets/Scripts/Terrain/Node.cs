@@ -9,6 +9,7 @@ public class Node {
     public int gridX;
     public int gridY;
     public Node parent;
+    public bool selected;
 
     public int gCost;
     public int hCost;
@@ -20,6 +21,7 @@ public class Node {
         worldPosition = _worldPos;
         gridX = _gridX;
         gridY = _gridY;
+        selected = false;
     }
 
     public int HeapIndex {

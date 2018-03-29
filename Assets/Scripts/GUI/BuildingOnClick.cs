@@ -17,7 +17,7 @@ public class BuildingOnClick : MonoBehaviour {
     {
         buildingPlacement = GetComponent<BuildingPlacement>();
         rm = FindObjectOfType<ResourceManager>();
-        message += " cost: \n";
+        message += "\n";
         ObjectOnGrid ong = building.GetComponent<ObjectOnGrid>();
         if (ong.costWood != 0)
         {

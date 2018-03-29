@@ -112,6 +112,9 @@ public class WoodCutterScript : MonoBehaviour {
 
     public void TreeChoped()
     {
+        ObjectOnGrid oog = currenTree.GetComponent<ObjectOnGrid>();
+        oog.grid.SetWalkable(oog.gridPosX, oog.gridPosY);
+
         currenTree = null;
         currentChopingTime = 0f;
         state = States.CarryingGoods;

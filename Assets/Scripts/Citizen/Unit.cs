@@ -14,6 +14,9 @@ public class Unit : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (agent.remainingDistance == Mathf.Infinity) {
+            agent.destination = transform.position;
+        }
     }
 
     public void MoveTo(Vector3 position) {
@@ -21,12 +24,21 @@ public class Unit : MonoBehaviour {
     }
 
     public bool ArrivedAtTarget() {
+
         if (!agent.pathPending) {
             if (agent.remainingDistance <= agent.stoppingDistance) {
                 if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f) {
                     return true;
                 }
             }
+        }
+
+        return false;
+    }
+
+    public bool ArrivedAtTarget(Transform transformTarget) {
+        if (Vector3.Distance(transform.position, transformTarget.position) <= agent.stoppingDistance) {
+            return true;
         }
 
         return false;

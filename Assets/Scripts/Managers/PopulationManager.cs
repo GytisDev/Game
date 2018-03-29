@@ -6,37 +6,45 @@ using UnityEngine.UI;
 public class PopulationManager : MonoBehaviour {
 
     public Text poptext;
-    public int Population;
-    public int poplimit;
+    public int population;
+    public int popLimit;
 
 	// Use this for initialization
 	void Start () {
-        Population = 0;
-        poplimit = 5;
+        population = 0;
+        popLimit = 5;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        poptext.text = Population.ToString() + "\n/" + poplimit.ToString();
+        poptext.text = population.ToString() + "\n/" + popLimit.ToString();
 	}
 
     public void DecreasePopulation(int i)
     {
-        Population -= i;
+        population -= i;
     }
 
     public void IncreasePopulation(int i)
     {
-        Population += i;
+        population += i;
     }
 
     public void DecreasePopulationLimit(int i)
     {
-        poplimit -= i;
+        popLimit -= i;
     }
 
     public void IncreasePopulationLimit(int i)
     {
-        poplimit += i;
+        popLimit += i;
+    }
+
+    public bool isPopLimitReached() {
+        return population >= popLimit;
+    }
+
+    public bool isPopLimitReached(int count) {
+        return population + count >= popLimit;
     }
 }

@@ -17,6 +17,8 @@ public class BuildingPlacement : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        
+
         if (currentBuilding != null && !placed) {
 
             ObjectOnGrid data = currentBuilding.GetComponent<ObjectOnGrid>();
@@ -27,29 +29,30 @@ public class BuildingPlacement : MonoBehaviour {
 
             Vector3 pos = new Vector3(hit.point.x, 0, hit.point.z);
 
-            currentBuilding.transform.position = RoundTransform(pos, grid.nodeDiameter);
+            Node rayPointNode = grid.NodeFromWorldPoint(hit.point);
+            Vector3 rayPointNodePos = rayPointNode.worldPosition;
+            ObjectOnGrid oog = currentBuilding.GetComponent<ObjectOnGrid>();
+
+            print(rayPointNode.worldPosition.x + " " + rayPointNode.worldPosition.z + "\n" + hit.point.x + " " + hit.point.z);
+
+            currentBuilding.transform.position = rayPointNodePos + new Vector3((oog.takesSpaceX + 1) % 2 * grid.nodeDiameter / 2, 0, (oog.takesSpaceY + 1) % 2 * grid.nodeDiameter / 2);
 
             if (Input.GetMouseButtonDown(0)) {
-                //Vector3 Position = currentBuilding.position;
-                //if(Position.x < 0)
+
                 Node node = grid.NodeFromWorldPoint(currentBuilding.position);
-                data.gridPosX = node.gridX;
-                data.gridPosY = node.gridY;
-
-
-                ObjectOnGrid oog = currentBuilding.GetComponent<ObjectOnGrid>();
-                oog.placed = true;
                 
 
-                if (grid.UpdateGrid(data.gridPosX, data.gridPosY, data.takesSpaceX, data.takesSpaceY)) {
-                    
+                if (grid.UpdateGrid(rayPointNode.gridX, rayPointNode.gridY, data.takesSpaceX, data.takesSpaceY)) {
+
+                    data.gridPosX = node.gridX;
+                    data.gridPosY = node.gridY;
+
                     rm.DecreaseResources(ResourceManager.Resources.Wood, oog.costWood);
                     rm.DecreaseResources(ResourceManager.Resources.Stone, oog.costStone);
+                    oog.placed = true;
 
                     placed = true;
                 }
-                //ObjectOnGrid oog = currentBuilding.GetComponent<ObjectOnGrid>();
-                //oog.placed = true;
             }
 
             if (Input.GetMouseButtonDown(1)) {
