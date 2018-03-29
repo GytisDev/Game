@@ -9,7 +9,7 @@ public class WoodCutterScript : MonoBehaviour {
     ResourceManager rm;
     public WoodCutterHutController wcc;
     public GameObject citizen;
-    public int Radius = 3;
+    public int Radius = 8;
     public int WoodAccumulation = 40;
     private int WoodGained;
     public float ChopingTime = 1f;
