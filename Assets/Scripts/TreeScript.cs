@@ -8,14 +8,16 @@ public class TreeScript : MonoBehaviour {
     public bool available;
     public float scale;
     public float growrate;
+    bool grown;
     // Use this for initialization
 	void Start () {
         available = false;
-	}
+        grown = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        if (available == false)
+        if (!grown)
         {
             Grow();
         }
@@ -25,20 +27,22 @@ public class TreeScript : MonoBehaviour {
     {
         if (scale < 0.4)
         {
-            scale = scale + Time.deltaTime * Random.Range(1,1000) * growrate * 0.0001F;
+            scale = scale + Time.deltaTime * Random.Range(1, 1000) * growrate * 0.0001F;
             transform.localScale = new Vector3(scale, scale, scale);
         }
-        else available = true;
+        else
+        {
+            grown = true;
+            available = true;
+        }
     }
 
     public int Chop(int quantity)
     {
-        if (available == true)
-        {
-            if (quantity > woodLeft)
-                quantity = woodLeft;
-            woodLeft -= quantity;
-        }
+        if (quantity > woodLeft)
+            quantity = woodLeft;
+        woodLeft -= quantity;
+
         return quantity;
     }
 

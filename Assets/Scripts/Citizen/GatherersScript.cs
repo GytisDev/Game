@@ -185,6 +185,6 @@ public class GatherersScript : MonoBehaviour {
 
     public bool ArrivedAtTarget(GameObject targetObject)
     {
-        return citizen.GetComponent<Unit>().ArrivedAtTarget();
+        return citizen.GetComponent<Unit>().ArrivedAtTarget(targetObject.transform);
     }
 }

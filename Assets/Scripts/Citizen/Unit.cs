@@ -14,7 +14,11 @@ public class Unit : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (agent.remainingDistance == Mathf.Infinity) {
+        //if (agent.remainingDistance == Mathf.Infinity) {
+        //    agent.destination = transform.position;
+        //}
+        if (agent.path.status == NavMeshPathStatus.PathPartial)
+        {
             agent.destination = transform.position;
         }
     }
@@ -37,8 +41,23 @@ public class Unit : MonoBehaviour {
     }
 
     public bool ArrivedAtTarget(Transform transformTarget) {
-        if (Vector3.Distance(transform.position, transformTarget.position) <= agent.stoppingDistance) {
+        //if (Vector3.Distance(transform.position, transformTarget.position) <= agent.stoppingDistance) {
+        //    return true;
+        //}
+
+        //if (agent.remainingDistance != Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete && agent.velocity.sqrMagnitude == 0f)
+        //{
+        //    return true;
+        //}
+
+        if (Vector3.Distance(transform.position, agent.destination) <= agent.stoppingDistance + 0.5f)
+        {
             return true;
+        } else
+        {
+            print("Remaining distance: " + agent.remainingDistance + 
+                "\nPath status: " + agent.path.status + 
+                "\nVelocity: " + agent.velocity.sqrMagnitude);
         }
 
         return false;

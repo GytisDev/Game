@@ -124,7 +124,7 @@ public class WoodCutterScript : MonoBehaviour {
 
     public bool ArrivedAtTarget(GameObject targetObject)
     {
-        return unit.ArrivedAtTarget();
+        return unit.ArrivedAtTarget(targetObject.transform);
     }
 
     public void Work()
