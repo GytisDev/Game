@@ -11,16 +11,16 @@ public class TreeScript : MonoBehaviour {
     bool grown;
     // Use this for initialization
 	void Start () {
-        available = false;
-        grown = false;
+        //available = false;
+        //grown = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (!grown)
-        {
-            Grow();
-        }
+        //if (!grown)
+        //{
+        //    Grow();
+        //}
     }
 
     public void Grow()
