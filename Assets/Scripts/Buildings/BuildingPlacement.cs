@@ -5,6 +5,7 @@ using UnityEngine;
 public class BuildingPlacement : MonoBehaviour {
 
     public Camera camera;
+    GameObject lastBuilding;
     private Transform currentBuilding;
     public Grid grid;
     private ResourceManager rm;
@@ -19,7 +20,7 @@ public class BuildingPlacement : MonoBehaviour {
     void Update() {
         
 
-        if (currentBuilding != null && !placed) {
+        if (currentBuilding != null) {
 
             ObjectOnGrid data = currentBuilding.GetComponent<ObjectOnGrid>();
 
@@ -35,7 +36,7 @@ public class BuildingPlacement : MonoBehaviour {
 
             print(rayPointNode.worldPosition.x + " " + rayPointNode.worldPosition.z + "\n" + hit.point.x + " " + hit.point.z);
 
-            currentBuilding.transform.position = rayPointNodePos + new Vector3((oog.takesSpaceX + 1) % 2 * grid.nodeDiameter / 2, 0, (oog.takesSpaceY + 1) % 2 * grid.nodeDiameter / 2);
+            currentBuilding.transform.position = rayPointNodePos + new Vector3((oog.takesSpaceX + 1) % 2 * grid.nodeDiameter / 2, 0.5f, (oog.takesSpaceY + 1) % 2 * grid.nodeDiameter / 2);
 
             if (Input.GetMouseButtonDown(0)) {
 
@@ -51,8 +52,15 @@ public class BuildingPlacement : MonoBehaviour {
                     rm.DecreaseResources(ResourceManager.Resources.Stone, oog.costStone);
                     oog.placed = true;
 
-                    placed = true;
+                    currentBuilding = null;
                 }
+
+                if (oog.objectName == "Road") {
+                    SetItem(lastBuilding);
+                }
+
+
+
             }
 
             if (Input.GetMouseButtonDown(1)) {
@@ -76,7 +84,8 @@ public class BuildingPlacement : MonoBehaviour {
     }
 
     public void SetItem(GameObject b) {
-        currentBuilding = ((GameObject)Instantiate(b)).transform;
+        lastBuilding = b;
+        currentBuilding = Instantiate(b).transform;
         placed = false;
     }
 }

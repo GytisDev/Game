@@ -6,10 +6,16 @@ using UnityEngine.AI;
 public class Unit : MonoBehaviour {
 
     private NavMeshAgent agent;
+    private Grid grid;
+    private double speedOnRoad;
+    private double speedOnDirt;
 
     // Use this for initialization
     void Start() {
         agent = GetComponent<NavMeshAgent>();
+        grid = FindObjectOfType<Grid>();
+        speedOnDirt = agent.speed;
+        speedOnRoad = speedOnDirt + speedOnDirt;
     }
 
     // Update is called once per frame
@@ -21,6 +27,16 @@ public class Unit : MonoBehaviour {
         {
             agent.destination = transform.position;
         }
+        if (IsOnRoad()) {
+            agent.speed = (float)speedOnRoad;
+        }
+        else {
+            agent.speed = (float)speedOnDirt;
+        }
+    }
+
+    private bool IsOnRoad() {
+        return grid.NodeFromWorldPoint(transform.position).road;
     }
 
     public void MoveTo(Vector3 position) {
