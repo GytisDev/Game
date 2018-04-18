@@ -91,6 +91,29 @@ public class Grid : MonoBehaviour {
         return true;
     }
 
+    public Node[,] GetNodes(int gridX, int gridY, int takesX, int takesY)
+    {
+
+        Node[,] nodes = new Node[takesX, takesY];
+        int subX = takesX / 2 - (takesX + 1) % 2;
+        int subY = takesY / 2 - (takesY + 1) % 2;
+
+        int i = 0;
+        int j = 0;
+        for (int x = gridX - subX; x < gridX - subX + takesX; x++)
+        {
+            j = 0;
+            for (int y = gridY - subY; y < gridY - subY + takesY; y++)
+            {
+                nodes[i,j] = grid[x, y];
+                j++;
+            }
+            i++;
+        }
+
+        return nodes;
+    }
+
     public List<Node> GetNeighbours(Node node) {
         List<Node> neighbours = new List<Node>();
 

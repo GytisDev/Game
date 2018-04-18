@@ -10,7 +10,6 @@ public class BerrieBushScript : MonoBehaviour {
     public float growthTime = 10f;
     public float currTime = 0;
     public GameObject BushWithoutBerries;
-    bool active = true;
     // Use this for initialization
     void Start()
     {
@@ -24,6 +23,10 @@ public class BerrieBushScript : MonoBehaviour {
             GameObject bushWithoutBerries = Instantiate(BushWithoutBerries);
             bushWithoutBerries.transform.position = gameObject.transform.position;
             bushWithoutBerries.transform.rotation = gameObject.transform.rotation;
+
+            ObjectOnGrid oogNoBerryBush = bushWithoutBerries.GetComponent<ObjectOnGrid>();
+            oogNoBerryBush.placed = true;
+            oogNoBerryBush.SetNodes(GetComponent<ObjectOnGrid>().Nodes);
 
             Destroy(gameObject);
         }

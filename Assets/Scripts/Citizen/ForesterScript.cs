@@ -17,12 +17,11 @@ public class ForesterScript : MonoBehaviour {
     float currentFindingTime = 0f;
     bool hasWorkToDo = false;
     bool noSpaceInArea = false;
-    int failedSearches = 0;
     GameObject newTreeLocation;
     Node targetNode = null;
     Unit unit;
 
-    Vector3 lastPos, currentPos;
+    Vector3 lastPos;
 
     // Use this for initialization
     void Start()
@@ -105,7 +104,9 @@ public class ForesterScript : MonoBehaviour {
     {
         GameObject youngTree = Instantiate(fhs.YoungTree);
         youngTree.transform.position = newTreeLocation.transform.position;
-        youngTree.GetComponent<ObjectOnGrid>().placed = true;
+        ObjectOnGrid oogNewTree = youngTree.GetComponent<ObjectOnGrid>();
+        oogNewTree.placed = true;
+        oogNewTree.SetNodes(new Node[,] { { targetNode } });
 
         newTreeLocation = null;
         targetNode = null;

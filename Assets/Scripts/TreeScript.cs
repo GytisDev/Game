@@ -50,9 +50,10 @@ public class TreeScript : MonoBehaviour {
     {
         if(woodLeft <= 0)
         {
-            Grid grid = GameObject.FindObjectOfType<Grid>();
-            Node treeNode = grid.NodeFromWorldPoint(transform.position);
-            treeNode.walkable = true;
+            //Grid grid = GameObject.FindObjectOfType<Grid>();
+            //Node treeNode = grid.NodeFromWorldPoint(transform.position);
+            //treeNode.walkable = true;
+            this.GetComponent<ObjectOnGrid>().MakeWalkable();
             Destroy(gameObject);
         }
     }

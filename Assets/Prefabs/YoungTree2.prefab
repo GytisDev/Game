@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23190320203647718}
   - component: {fileID: 114512316345072198}
   - component: {fileID: 114368836845847948}
+  - component: {fileID: 208940676419926210}
   m_Layer: 0
   m_Name: YoungTree2
   m_TagString: Untagged
@@ -119,3 +120,18 @@ MonoBehaviour:
   growthTime: 2
   currTime: 0
   Tree: {fileID: 1250399867202540, guid: 18b941e032ec1a34ba36bec3fc37d0cd, type: 2}
+--- !u!208 &208940676419926210
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1664302256145910}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.72, y: 1.651, z: 5.4800005}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.127, y: 0.05, z: 5.4670005}
+  m_TimeToStationary: 0.5

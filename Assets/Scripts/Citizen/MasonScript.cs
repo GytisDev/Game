@@ -72,10 +72,6 @@ public class MasonScript : MonoBehaviour {
                     state = States.Working;
                     Debug.Log("Arived at the rock");
                 }
-                else
-                {
-                    //Debug.Log("Going");
-                }
                 break;
 
             case States.Working:
@@ -131,16 +127,15 @@ public class MasonScript : MonoBehaviour {
     {
         if (rm.stone < rm.storage)
         {
-            //FindTree();
             FindNearestRock();
 
             if (currentRock == null)
             {
-                //rm.noTrees = true;
                 noRocksInArea = true;
                 return;
             }
 
+            noRocksInArea = false;
             unit.MoveTo(currentRock.transform.position);
             hasWorkToDo = true;
             state = States.PathFinding;
@@ -201,8 +196,6 @@ public class MasonScript : MonoBehaviour {
                         currentRock = rock;
                         dist = currRockDist;
                     }
-                    //ts.available = false;
-                    //return;
                 }
             }
         }
