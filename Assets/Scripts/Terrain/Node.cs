@@ -5,6 +5,7 @@ using UnityEngine;
 public class Node {
 
     public bool walkable;
+    public bool occupied;
     public Vector3 worldPosition;
     public int gridX;
     public int gridY;
@@ -23,6 +24,7 @@ public class Node {
         gridX = _gridX;
         gridY = _gridY;
         selected = false;
+        occupied = false;
     }
 
     public int HeapIndex {

@@ -84,11 +84,11 @@ public class CameraRTS : MonoBehaviour
         }
         if (Input.GetKey("e"))
         {
-            transform.Rotate(Vector3.up, 2f, Space.World);
+            transform.Rotate(Vector3.up, 100f * Time.deltaTime, Space.World);
         }
         if (Input.GetKey("q"))
         {
-            transform.Rotate(Vector3.down, 2f, Space.World);
+            transform.Rotate(Vector3.down, 100f * Time.deltaTime, Space.World);
         }
 
         Grid grid = GameObject.FindObjectOfType<Grid>();

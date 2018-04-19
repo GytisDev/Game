@@ -6,7 +6,8 @@ public class BuildingPlacement : MonoBehaviour {
 
     public Camera camera;
     GameObject lastBuilding;
-    private Transform currentBuilding;
+    [HideInInspector]
+    public Transform currentBuilding;
     public Grid grid;
     private ResourceManager rm;
     bool placed = false;
@@ -43,7 +44,7 @@ public class BuildingPlacement : MonoBehaviour {
                 Node node = grid.NodeFromWorldPoint(currentBuilding.position);
                 
 
-                if (grid.UpdateGrid(rayPointNode.gridX, rayPointNode.gridY, data.takesSpaceX, data.takesSpaceY)) {
+                if (grid.UpdateGrid(rayPointNode.gridX, rayPointNode.gridY, data.takesSpaceX, data.takesSpaceY, data.occupiesSpaceX, data.occupiesSpaceY)) {
 
                     data.gridPosX = node.gridX;
                     data.gridPosY = node.gridY;
@@ -58,8 +59,6 @@ public class BuildingPlacement : MonoBehaviour {
                 if (oog.objectName == "Road") {
                     SetItem(lastBuilding);
                 }
-
-
 
             }
 

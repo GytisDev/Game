@@ -10,7 +10,6 @@ public class BerrieBushScript : MonoBehaviour {
     public float growthTime = 10f;
     public float currTime = 0;
     public GameObject BushWithoutBerries;
-    bool active = true;
     // Use this for initialization
     void Start()
     {

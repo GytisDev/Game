@@ -45,15 +45,7 @@ public class Unit : MonoBehaviour {
 
     public bool ArrivedAtTarget() {
 
-        if (!agent.pathPending) {
-            if (agent.remainingDistance <= agent.stoppingDistance) {
-                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        return (Vector3.Distance(transform.position, agent.destination) <= agent.stoppingDistance + 0.5f);
     }
 
     public bool ArrivedAtTarget(Transform transformTarget) {
@@ -69,12 +61,7 @@ public class Unit : MonoBehaviour {
         if (Vector3.Distance(transform.position, agent.destination) <= agent.stoppingDistance + 0.5f)
         {
             return true;
-        } else
-        {
-            print("Remaining distance: " + agent.remainingDistance + 
-                "\nPath status: " + agent.path.status + 
-                "\nVelocity: " + agent.velocity.sqrMagnitude);
-        }
+        } 
 
         return false;
     }
