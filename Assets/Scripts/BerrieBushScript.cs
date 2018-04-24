@@ -24,6 +24,10 @@ public class BerrieBushScript : MonoBehaviour {
             bushWithoutBerries.transform.position = gameObject.transform.position;
             bushWithoutBerries.transform.rotation = gameObject.transform.rotation;
 
+            ObjectOnGrid oogNoBerryBush = bushWithoutBerries.GetComponent<ObjectOnGrid>();
+            oogNoBerryBush.placed = true;
+            oogNoBerryBush.SetNodes(GetComponent<ObjectOnGrid>().Nodes);
+
             Destroy(gameObject);
         }
 	}

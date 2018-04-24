@@ -147,7 +147,7 @@ MonoBehaviour:
   takesSpaceY: 1
   costWood: 0
   costStone: 0
-  placed: 1
+  placed: 0
 --- !u!208 &208893159142175468
 NavMeshObstacle:
   m_ObjectHideFlags: 1

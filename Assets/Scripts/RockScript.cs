@@ -15,13 +15,6 @@ public class RockScript : MonoBehaviour {
 
     public int Mine(int quantity)
     {
-        //if (available == true)
-        //{
-        //    if (quantity > stoneLeft)
-        //        quantity = stoneLeft;
-        //    stoneLeft -= quantity;
-        //}
-
         if (quantity > stoneLeft)
             quantity = stoneLeft;
         stoneLeft -= quantity;
@@ -35,9 +28,7 @@ public class RockScript : MonoBehaviour {
     {
         if (stoneLeft <= 0)
         {
-            Grid grid = GameObject.FindObjectOfType<Grid>();
-            Node treeNode = grid.NodeFromWorldPoint(transform.position);
-            treeNode.walkable = true;
+            this.GetComponent<ObjectOnGrid>().MakeWalkable();
             Destroy(gameObject);
         }
     }

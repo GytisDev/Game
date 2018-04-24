@@ -44,6 +44,8 @@ public class BuildingPlacement : MonoBehaviour {
 
                 if (grid.UpdateGrid(rayPointNode.gridX, rayPointNode.gridY, data.takesSpaceX, data.takesSpaceY)) {
 
+                    oog.SetNodes(grid.GetNodes(rayPointNode.gridX, rayPointNode.gridY, data.takesSpaceX, data.takesSpaceY));
+
                     data.gridPosX = node.gridX;
                     data.gridPosY = node.gridY;
 

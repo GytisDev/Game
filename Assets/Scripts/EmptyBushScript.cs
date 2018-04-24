@@ -19,7 +19,9 @@ public class EmptyBushScript : MonoBehaviour {
             GameObject berryBush = Instantiate(BerryBush);
             berryBush.transform.position = gameObject.transform.position;
             berryBush.transform.rotation = gameObject.transform.rotation;
-            berryBush.GetComponent<ObjectOnGrid>().placed = true;
+            ObjectOnGrid oogBerryBush = berryBush.GetComponent<ObjectOnGrid>();
+            oogBerryBush.placed = true;
+            oogBerryBush.SetNodes(GetComponent<ObjectOnGrid>().Nodes);
             Destroy(gameObject);
         }
         else

@@ -99,7 +99,11 @@ public class WorldGeneration : MonoBehaviour {
 				if (Trees [x, y] != null) {
 					if (grid.IsWalkable (x, y)) 
 					{
+<<<<<<< HEAD
 						Instantiate(Trees[x, y], grid.GetNodePosition (x, y) + new Vector3(0, 0.5f, 0), Quaternion.Euler(new Vector3(-90, 0,0)), parent);
+=======
+						Instantiate(Trees[x, y], grid.GetNodePosition (x, y), Quaternion.Euler(new Vector3(-90, 0,0)), parent).GetComponent<ObjectOnGrid>().SetNodes(new Node[,] { { grid.GetNode(x,y)} });
+>>>>>>> 7b04433b555179bd9cb9f24086239e6aa7fd6c8a
 						grid.SetOccupied (x, y);
 					}
 				}
