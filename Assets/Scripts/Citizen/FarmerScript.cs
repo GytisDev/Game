@@ -1,51 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class FarmerScript : MonoBehaviour {
 
     public enum States { GoingToWorkplace, NeedsCultivating, GoingToCultivate,
         Cultivating, NeedsPlanting, GoingToPlant, NeedsCutting, GoingToCut, Cutting,
-        BringingFood, Planting, CommingBack, PathFinding, Available };
+        Planting, CommingBack, Available };
+
+    ResourceManager rm;
+    public FarmingShackController fsc;
+    FieldScript currentField;
+    Unit unit;
+    List<FieldScript> fields;
 
     public States state;
-    public FarmingShackController fsc;
-    public GameObject citizen;
-    public int Radius;
+
     public float plantingTime = 0f;
     public float cultivatingTime = 0f;
     public float cuttingTime = 0f;
-    public float timerToWork = 0;
-    FieldScript currentField;
+    public float timerToWork = 0.5f;
 
-    ResourceManager rm;
-    float currentCultivatingTime = 0f;
-    float currentPlantingTime = 0f;
-    float currentCuttingTime = 0f;
+    float currentWorkingTime = 0;
     int carryingFood = 0;
-    GameObject currentFieldLocation;
-    Node targetNode = null;
-    Unit unit;
-    Grid grid;
-    List<FieldScript> fields;
-    Vector3 targetPosition;
-
-    Vector3 lastPos, currentPos;
 
     // Use this for initialization
     void Start() {
         rm = FindObjectOfType<ResourceManager>();
-        lastPos = gameObject.transform.position;
         unit = GetComponent<Unit>();
-        Radius = fsc.Radius;
-        grid = FindObjectOfType<Grid>();
         fields = fsc.Fields;
         state = States.Available;
     }
 
     // Update is called once per frame
     void Update() {
-        if (citizen == null) return;
 
         timerToWork += Time.deltaTime;
 
@@ -68,7 +55,6 @@ public class FarmerScript : MonoBehaviour {
                 currentField = getUncultivatedFields()[0];
                 if (currentField == null) {
                     state = States.CommingBack;
-                    unit.MoveTo(fsc.InitialPosition.transform.position);
                 }
                 else {
                     unit.MoveTo(currentField.transform.position);
@@ -94,14 +80,14 @@ public class FarmerScript : MonoBehaviour {
                 break;
 
             case States.Planting:
-                if (currentPlantingTime < plantingTime) {
-                    currentPlantingTime += Time.deltaTime;
+                if (currentWorkingTime < plantingTime) {
+                    currentWorkingTime += Time.deltaTime;
                 }
                 else {
                     currentField.SetPlanted();
                     unit.MoveTo(fsc.InitialPosition.transform.position);
                     state = States.CommingBack;
-                    currentPlantingTime = 0;
+                    currentWorkingTime = 0;
                 }
                 break;
 
@@ -111,17 +97,19 @@ public class FarmerScript : MonoBehaviour {
                 }
                 break;
             case States.Cultivating:
-                if(currentCultivatingTime < cultivatingTime) {
-                    currentCultivatingTime += Time.deltaTime;
+                if(currentWorkingTime < cultivatingTime) {
+                    currentWorkingTime += Time.deltaTime;
                 }
                 else {
                     currentField.SetCultivated();
                     unit.MoveTo(fsc.InitialPosition.transform.position);
                     state = States.CommingBack;
-                    currentCultivatingTime = 0;
+                    currentWorkingTime = 0;
                 }
                 break;
             case States.CommingBack:
+                unit.MoveTo(fsc.InitialPosition.transform.position);
+
                 if (ArrivedAtTarget()) {
                     state = States.Available;
                     rm.IncreaseResources(ResourceManager.Resources.Food, carryingFood);
@@ -145,15 +133,15 @@ public class FarmerScript : MonoBehaviour {
                 }
                 break;
             case States.Cutting:
-                if (currentCuttingTime < cuttingTime) {
-                    currentCuttingTime += Time.deltaTime;
+                if (currentWorkingTime < cuttingTime) {
+                    currentWorkingTime += Time.deltaTime;
                 }
                 else {
                     currentField.SetCut();
                     unit.MoveTo(fsc.InitialPosition.transform.position);
                     state = States.CommingBack;
-                    currentCultivatingTime = 0;
-                    carryingFood += 10;
+                    currentWorkingTime = 0;
+                    carryingFood += currentField.foodYield;
                 }
                 break;
             default:

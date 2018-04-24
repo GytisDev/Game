@@ -9,6 +9,7 @@ public class Unit : MonoBehaviour {
     private Grid grid;
     private double speedOnRoad;
     private double speedOnDirt;
+    Animation anim;
 
     // Use this for initialization
     void Start() {
@@ -16,6 +17,7 @@ public class Unit : MonoBehaviour {
         grid = FindObjectOfType<Grid>();
         speedOnDirt = agent.speed;
         speedOnRoad = speedOnDirt + speedOnDirt;
+        anim = GetComponent<Animation>();
     }
 
     // Update is called once per frame
@@ -23,6 +25,13 @@ public class Unit : MonoBehaviour {
         //if (agent.remainingDistance == Mathf.Infinity) {
         //    agent.destination = transform.position;
         //}
+        if(agent.velocity != Vector3.zero) {
+            StartAnimation();
+        }
+        else {
+            StopAnimation();
+        }
+
         if (agent.path.status == NavMeshPathStatus.PathPartial)
         {
             agent.destination = transform.position;
@@ -37,6 +46,14 @@ public class Unit : MonoBehaviour {
 
     private bool IsOnRoad() {
         return grid.NodeFromWorldPoint(transform.position).road;
+    }
+
+    public void StartAnimation() {
+        anim.Play();
+    }
+
+    public void StopAnimation() {
+        anim.Stop();
     }
 
     public void MoveTo(Vector3 position) {

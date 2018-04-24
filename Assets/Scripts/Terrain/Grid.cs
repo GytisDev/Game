@@ -63,38 +63,25 @@ public class Grid : MonoBehaviour {
         }
     }
 
-    public bool UpdateGrid(int gridX, int gridY, int takesX, int takesY, int takesXO, int takesYO) {
+    public bool UpdateGrid(int gridX, int gridY, int takesX, int takesY) {
 
         int subX = takesX / 2 - (takesX + 1) % 2;
         int subY = takesY / 2 - (takesY + 1) % 2;
 
-        int subXO = takesXO / 2 - (takesXO + 1) % 2;
-        int subYO = takesYO / 2 - (takesYO + 1) % 2;
-
         if (gridX - subX + takesX >= gridSizeX || gridX - subX < 0 || gridY - subY + takesY >= gridSizeY || gridY - subY < 0)
             return false;
 
-        for (int x = gridX - subXO; x < gridX - subXO + takesXO; x++) {
-            for (int y = gridY - subYO; y < gridY - subYO + takesYO; y++) {
-                if (!grid[x, y].walkable || grid[x, y].occupied) {
+        for (int x = gridX - subX; x < gridX - subX + takesX; x++) {
+            for (int y = gridY - subY; y < gridY - subY + takesY; y++) {
+                if (!grid[x, y].walkable) {
                     return false;
                 }
-                //if (name == "Road") {
-                //    grid[x, y].road = true;
-                //    return true;
-                //}
             }
         }
         //Pažymim unwalkable
         for (int x = gridX - subX; x < gridX -subX + takesX; x++) {
             for (int y = gridY - subY; y < gridY - subY + takesY; y++) {
                 grid[x, y].walkable = false;
-            }
-        }
-        //Pažymim occupied
-        for (int x = gridX - subXO; x < gridX - subXO + takesXO; x++) {
-            for (int y = gridY - subYO; y < gridY - subYO + takesYO; y++) {
-                grid[x, y].occupied = true;
             }
         }
 
@@ -151,8 +138,7 @@ public class Grid : MonoBehaviour {
                 foreach (Node node in grid) {
                     
                     Gizmos.color = (node.walkable) ? Color.white : Color.red;
-                    if (node.occupied)
-                        Gizmos.color = Color.green;
+
                     Gizmos.DrawCube(node.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
                 }
                 

@@ -35,8 +35,6 @@ public class BuildingPlacement : MonoBehaviour {
             Vector3 rayPointNodePos = rayPointNode.worldPosition;
             ObjectOnGrid oog = currentBuilding.GetComponent<ObjectOnGrid>();
 
-            print(rayPointNode.worldPosition.x + " " + rayPointNode.worldPosition.z + "\n" + hit.point.x + " " + hit.point.z);
-
             currentBuilding.transform.position = rayPointNodePos + new Vector3((oog.takesSpaceX + 1) % 2 * grid.nodeDiameter / 2, 0.5f, (oog.takesSpaceY + 1) % 2 * grid.nodeDiameter / 2);
 
             if (Input.GetMouseButtonDown(0)) {
@@ -44,7 +42,7 @@ public class BuildingPlacement : MonoBehaviour {
                 Node node = grid.NodeFromWorldPoint(currentBuilding.position);
                 
 
-                if (grid.UpdateGrid(rayPointNode.gridX, rayPointNode.gridY, data.takesSpaceX, data.takesSpaceY, data.occupiesSpaceX, data.occupiesSpaceY)) {
+                if (grid.UpdateGrid(rayPointNode.gridX, rayPointNode.gridY, data.takesSpaceX, data.takesSpaceY)) {
 
                     data.gridPosX = node.gridX;
                     data.gridPosY = node.gridY;

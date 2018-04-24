@@ -12,7 +12,6 @@ public class ObjectOnGrid : MonoBehaviour{
 
     public string objectName;
     public int takesSpaceX, takesSpaceY;
-    public int occupiesSpaceX, occupiesSpaceY;
     public int costWood, costStone;
 
     public bool placed = false;

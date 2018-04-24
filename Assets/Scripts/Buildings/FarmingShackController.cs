@@ -48,7 +48,6 @@ public class FarmingShackController : MonoBehaviour {
                     // Add ForesterScript componenet to asigned citizen
                     citizen.AddComponent<FarmerScript>();
                     FarmerScript fs = citizen.GetComponent<FarmerScript>();
-                    fs.citizen = citizen;
                     fs.fsc = this;
                     fs.ChangeState_GoingToWork();
 
@@ -75,9 +74,9 @@ public class FarmingShackController : MonoBehaviour {
                 if (HutNode.worldPosition.z < 0)
                     y++;
                 currentTargetNode = grid.GetNode(x, y);
-                if (currentTargetNode.walkable && !currentTargetNode.occupied) {
+                if (currentTargetNode.walkable) {
                     list.Add(Instantiate(EmptyField, currentTargetNode.worldPosition += new Vector3(0, 0.5f, 0), Quaternion.identity));
-                    currentTargetNode.occupied = true;
+                    currentTargetNode.walkable = false;
                     
                 }    
             }
