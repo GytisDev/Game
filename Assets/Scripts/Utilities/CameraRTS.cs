@@ -4,113 +4,86 @@ using UnityEngine;
 
 public class CameraRTS : MonoBehaviour
 {
+    [SerializeField]
+    private Transform target;
 
-    public bool panningWithMouse = true;
-    public float panSpeed = 20f;
-    public float scrollSpeed = 40f;
-    public float smoothingSpeed = 10f;
-    public float heightKoef = 0.05f;
+    [SerializeField]
+    private Vector3 offsetPosition;
 
-    public float panBorderThickness = 10f;
+    [SerializeField]
+    private Space offsetPositionSpace = Space.Self;
+
+    [SerializeField]
+    private bool lookAt = true;
 
     public float minY = 20f;
     public float maxY = 120f;
-    public float minAngle = 40f;
-    public float maxAngle = 90f;
-    Quaternion originalRotation;
+    public float scrollSpeed = 40f;
+    public float smoothingSpeed = 10f;
+
     Vector3 pos;
 
-    private Vector3 dir;
-    void Start()
+    private void Update()
     {
-        originalRotation = transform.rotation;
-        pos = transform.position;
-        RecalculateCameraAngle();
-    }
-
-    //reset rotation
-    public void ResetRotation()
-    {
-        transform.rotation = originalRotation;
-
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        float _heightKoef = Mathf.Pow(pos.y, 0.5f) * heightKoef;
-
-        if (Input.GetKey("w") || (Input.mousePosition.y >= Screen.height - panBorderThickness && panningWithMouse))
-        {
-            Vector3 angles = transform.eulerAngles;
-            transform.eulerAngles = new Vector3(45f, angles.y, angles.z);
-            dir = transform.forward;
-            dir.y = 0;
-            pos += dir * panSpeed * _heightKoef * Time.deltaTime;
-            transform.eulerAngles = angles;
-        }
-        if (Input.GetKey("d") || (Input.mousePosition.x >= Screen.width - panBorderThickness && panningWithMouse))
-        {
-            dir = transform.right;
-            dir.y = 0;
-
-            pos += dir * panSpeed * _heightKoef * Time.deltaTime;
-        }
-        if (Input.GetKey("s") || (Input.mousePosition.y <= panBorderThickness && panningWithMouse))
-        {
-            Vector3 angles = transform.eulerAngles;
-            transform.eulerAngles = new Vector3(45f, angles.y, angles.z);
-            dir = -transform.forward;
-            dir.y = 0;
-
-            pos += dir * panSpeed * _heightKoef * Time.deltaTime;
-            transform.eulerAngles = angles;
-        }
-        if (Input.GetKey("a") || (Input.mousePosition.x <= panBorderThickness && panningWithMouse))
-        {
-            dir = -transform.right;
-            dir.y = 0;
-
-            pos += dir * panSpeed * _heightKoef * Time.deltaTime;
-        }
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
+            pos = transform.position;
             if (pos.y > minY)
-                pos += transform.forward * scrollSpeed * Time.deltaTime;
+            {
+                offsetPosition.y -= scrollSpeed * Time.deltaTime;
+                offsetPosition.z += scrollSpeed * 0.5f * Time.deltaTime;
+            }
+            Debug.Log("y: " + pos.y);
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
+            pos = transform.position;
             if (pos.y < maxY)
-                pos -= transform.forward * scrollSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey("e"))
-        {
-            transform.Rotate(Vector3.up, 2f, Space.World);
-        }
-        if (Input.GetKey("q"))
-        {
-            transform.Rotate(Vector3.down, 2f, Space.World);
+            {
+                offsetPosition.y += scrollSpeed * Time.deltaTime;
+                offsetPosition.z -= scrollSpeed * 0.5f * Time.deltaTime;
+            }
+            Debug.Log("y: " + pos.y);
         }
 
-        Grid grid = GameObject.FindObjectOfType<Grid>();
-        float mapX = grid.gridSizeX * grid.nodeRadius;
-        float mapY = grid.gridSizeY * grid.nodeRadius;
-
-        pos.x = Mathf.Clamp(pos.x, -mapX, mapX);
         pos.y = Mathf.Clamp(pos.y, minY, maxY);
-        pos.z = Mathf.Clamp(pos.z, -mapY - 5f, mapY - 5f);
-
-        transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * smoothingSpeed);
     }
 
-    private void LateUpdate()
+    // LateUpdate is called after Update each frame
+
+    void LateUpdate()
     {
-        RecalculateCameraAngle();
+        Refresh();
     }
 
-    void RecalculateCameraAngle()
+    public void Refresh()
     {
-        float newXRotation = minAngle + ((maxAngle - minAngle) * (transform.position.y - minY) / (maxY - minY));
+        if (target == null)
+        {
+            Debug.LogWarning("Missing target ref !", this);
 
-        transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(newXRotation, transform.eulerAngles.y, transform.eulerAngles.z), Time.deltaTime * smoothingSpeed);
+            return;
+        }
+
+        // compute position
+        if (offsetPositionSpace == Space.Self)
+        {
+            transform.position = Vector3.Lerp(transform.position, target.TransformPoint(offsetPosition), 0.5f);
+        }
+        else
+        {
+            transform.position = target.position + offsetPosition;
+
+        }
+
+        // compute rotation
+        if (lookAt)
+        {
+            transform.LookAt(target);
+        }
+        else
+        {
+            transform.rotation = target.rotation;
+        }
     }
 }
