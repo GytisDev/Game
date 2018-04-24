@@ -73,20 +73,17 @@ public class Grid : MonoBehaviour {
 
         for (int x = gridX - subX; x < gridX - subX + takesX; x++) {
             for (int y = gridY - subY; y < gridY - subY + takesY; y++) {
-                if (!grid[x, y].walkable)
+                if (!grid[x, y].walkable) {
                     return false;
-                if (name == "Road") {
-                    grid[x, y].road = true;
-                    return true;
                 }
             }
         }
-
+        //Pažymim unwalkable
         for (int x = gridX - subX; x < gridX -subX + takesX; x++) {
             for (int y = gridY - subY; y < gridY - subY + takesY; y++) {
                 grid[x, y].walkable = false;
             }
-         }
+        }
 
         return true;
     }

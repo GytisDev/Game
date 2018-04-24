@@ -52,6 +52,8 @@ public class BuildingOnClick : MonoBehaviour {
 
     public void TaskOnClick()
     {
+        buildingPlacement.currentBuilding = null;
+
         ObjectOnGrid ong = building.GetComponent<ObjectOnGrid>();
 
         if (rm.isEnough(ong.costWood, ong.costStone, 0))

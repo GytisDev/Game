@@ -9,6 +9,7 @@ public class Unit : MonoBehaviour {
     private Grid grid;
     private double speedOnRoad;
     private double speedOnDirt;
+    Animation anim;
 
     // Use this for initialization
     void Start() {
@@ -16,6 +17,7 @@ public class Unit : MonoBehaviour {
         grid = FindObjectOfType<Grid>();
         speedOnDirt = agent.speed;
         speedOnRoad = speedOnDirt + speedOnDirt;
+        anim = GetComponent<Animation>();
     }
 
     // Update is called once per frame
@@ -23,6 +25,13 @@ public class Unit : MonoBehaviour {
         //if (agent.remainingDistance == Mathf.Infinity) {
         //    agent.destination = transform.position;
         //}
+        if(agent.velocity != Vector3.zero) {
+            StartAnimation();
+        }
+        else {
+            StopAnimation();
+        }
+
         if (agent.path.status == NavMeshPathStatus.PathPartial)
         {
             agent.destination = transform.position;
@@ -39,21 +48,21 @@ public class Unit : MonoBehaviour {
         return grid.NodeFromWorldPoint(transform.position).road;
     }
 
+    public void StartAnimation() {
+        anim.Play();
+    }
+
+    public void StopAnimation() {
+        anim.Stop();
+    }
+
     public void MoveTo(Vector3 position) {
         agent.destination = position;
     }
 
     public bool ArrivedAtTarget() {
 
-        if (!agent.pathPending) {
-            if (agent.remainingDistance <= agent.stoppingDistance) {
-                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        return (Vector3.Distance(transform.position, agent.destination) <= agent.stoppingDistance + 0.5f);
     }
 
     public bool ArrivedAtTarget(Transform transformTarget) {
@@ -69,12 +78,7 @@ public class Unit : MonoBehaviour {
         if (Vector3.Distance(transform.position, agent.destination) <= agent.stoppingDistance + 0.5f)
         {
             return true;
-        } else
-        {
-            print("Remaining distance: " + agent.remainingDistance + 
-                "\nPath status: " + agent.path.status + 
-                "\nVelocity: " + agent.velocity.sqrMagnitude);
-        }
+        } 
 
         return false;
     }

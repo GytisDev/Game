@@ -44,6 +44,7 @@ public class CameraRTS : MonoBehaviour
                 offsetPosition.z -= scrollSpeed * 0.5f * Time.deltaTime;
             }
             Debug.Log("y: " + pos.y);
+                pos -= transform.forward * scrollSpeed * Time.deltaTime;
         }
 
         pos.y = Mathf.Clamp(pos.y, minY, maxY);
