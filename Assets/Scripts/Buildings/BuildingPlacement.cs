@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BuildingPlacement : MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class BuildingPlacement : MonoBehaviour {
     public Grid grid;
     private ResourceManager rm;
     bool placed = false;
+    Vector3 FortressPos;
 
     // Use this for initialization
     void Start() {
@@ -39,8 +41,19 @@ public class BuildingPlacement : MonoBehaviour {
 
             if (Input.GetMouseButtonDown(0)) {
 
+                FortressScript Fortress = FindObjectOfType<FortressScript>();
+                if (Fortress != null)
+                {
+                    Debug.Log("qafdasdagasdfgasfg");
+                    FortressPos = Fortress.SpawnPosition.position;
+                    NavMeshPath path = new NavMeshPath();
+                    NavMesh.CalculatePath(FortressPos, currentBuilding.transform.position, NavMesh.AllAreas, path);
+                    if (path.status != NavMeshPathStatus.PathComplete)
+                        return;
+                }
+
                 Node node = grid.NodeFromWorldPoint(currentBuilding.position);
-                
+               
 
                 if (grid.UpdateGrid(rayPointNode.gridX, rayPointNode.gridY, data.takesSpaceX, data.takesSpaceY)) {
 

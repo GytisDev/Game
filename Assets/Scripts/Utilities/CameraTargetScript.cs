@@ -26,7 +26,7 @@ public class CameraTargetScript : MonoBehaviour
     void Start()
     {
         pos = transform.position;
-        pos.y = 1f;
+        pos.y = 5f;
         Grid grid = GameObject.FindObjectOfType<Grid>();
         mapX = grid.gridSizeX * grid.nodeRadius;
         mapY = grid.gridSizeY * grid.nodeRadius;
