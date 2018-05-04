@@ -133,6 +133,13 @@ MonoBehaviour:
   citizen: {fileID: 4791586018311432, guid: 2607eb4a935c26545af1a1959c3475e7, type: 2}
   citizenCount: 2
   SpawnPosition: {fileID: 4906289575268350}
+  Ranges:
+  - 20
+  - 40
+  - 80
+  Level: 1
+  spawnTime: 5
+  currentSpawnTime: 0
   spawnCitizens: 1
 --- !u!114 &114055293700225216
 MonoBehaviour:

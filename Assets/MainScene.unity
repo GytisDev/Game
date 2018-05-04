@@ -1830,6 +1830,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 912281030}
+  Build0: {fileID: 0}
+  Build1: {fileID: 0}
   currentBuilding: {fileID: 0}
   grid: {fileID: 1134222733}
 --- !u!114 &541349092
@@ -2512,6 +2514,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 912281030}
+  Build0: {fileID: 0}
+  Build1: {fileID: 0}
   currentBuilding: {fileID: 0}
   grid: {fileID: 1134222733}
 --- !u!114 &722915140
@@ -3851,6 +3855,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 912281030}
+  Build0: {fileID: 0}
+  Build1: {fileID: 0}
   currentBuilding: {fileID: 0}
   grid: {fileID: 1134222733}
 --- !u!114 &1003578820
@@ -4294,6 +4300,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 912281030}
+  Build0: {fileID: 0}
+  Build1: {fileID: 0}
   currentBuilding: {fileID: 0}
   grid: {fileID: 1134222733}
 --- !u!114 &1179520288
@@ -4610,6 +4618,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 912281030}
+  Build0: {fileID: 0}
+  Build1: {fileID: 0}
   currentBuilding: {fileID: 0}
   grid: {fileID: 1134222733}
 --- !u!114 &1224522857
@@ -5168,6 +5178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 912281030}
+  Build0: {fileID: 1019255794015378, guid: d17faeda22556734888bb2eb2ec517d1, type: 2}
+  Build1: {fileID: 1373491724537348, guid: 5ca38db773051374e960cea4feafe1c8, type: 2}
   currentBuilding: {fileID: 0}
   grid: {fileID: 1134222733}
 --- !u!114 &1428239867
@@ -5443,6 +5455,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 912281030}
+  Build0: {fileID: 0}
+  Build1: {fileID: 0}
   currentBuilding: {fileID: 0}
   grid: {fileID: 1134222733}
 --- !u!114 &1491510181
@@ -6771,6 +6785,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 912281030}
+  Build0: {fileID: 0}
+  Build1: {fileID: 0}
   currentBuilding: {fileID: 0}
   grid: {fileID: 1134222733}
 --- !u!114 &1813242075
@@ -7403,6 +7419,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 912281030}
+  Build0: {fileID: 0}
+  Build1: {fileID: 0}
   currentBuilding: {fileID: 0}
   grid: {fileID: 1134222733}
 --- !u!114 &1941120283
@@ -7875,6 +7893,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 912281030}
+  Build0: {fileID: 0}
+  Build1: {fileID: 0}
   currentBuilding: {fileID: 0}
   grid: {fileID: 1134222733}
 --- !u!114 &2010638382
@@ -8220,6 +8240,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 912281030}
+  Build0: {fileID: 0}
+  Build1: {fileID: 0}
   currentBuilding: {fileID: 0}
   grid: {fileID: 1134222733}
 --- !u!114 &2054389980
@@ -8428,6 +8450,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 912281030}
+  Build0: {fileID: 0}
+  Build1: {fileID: 0}
   currentBuilding: {fileID: 0}
   grid: {fileID: 1134222733}
 --- !u!114 &2073342753

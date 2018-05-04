@@ -88,6 +88,26 @@ public class Grid : MonoBehaviour {
         return true;
     }
 
+    public bool CheckDistance(int gridX, int gridY, int takesX, int takesY, Vector3 FortressPos, float maxDistance)
+    {
+
+        int subX = takesX / 2 - (takesX + 1) % 2;
+        int subY = takesY / 2 - (takesY + 1) % 2;
+
+        if (gridX - subX + takesX >= gridSizeX || gridX - subX < 0 || gridY - subY + takesY >= gridSizeY || gridY - subY < 0)
+            return false;
+
+        for (int x = gridX - subX; x < gridX - subX + takesX; x++)
+        {
+            for (int y = gridY - subY; y < gridY - subY + takesY; y++)
+            {
+                if (Vector3.Distance(FortressPos, GetNode(x, y).worldPosition) > maxDistance)
+                    return false;
+            }
+        }
+        return true;
+    }
+
     public Node[,] GetNodes(int gridX, int gridY, int takesX, int takesY)
     {
 
