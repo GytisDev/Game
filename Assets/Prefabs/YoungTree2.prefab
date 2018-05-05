@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94e104e7762ed3488bab2764e2de85d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  growthTime: 2
+  growthTime: 30
   currTime: 0
   Tree: {fileID: 1250399867202540, guid: 18b941e032ec1a34ba36bec3fc37d0cd, type: 2}
 --- !u!208 &208940676419926210

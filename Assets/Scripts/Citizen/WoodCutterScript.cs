@@ -10,9 +10,9 @@ public class WoodCutterScript : MonoBehaviour {
     public WoodCutterHutController wcc;
     public GameObject citizen;
     public int Radius = 8;
-    public int WoodAccumulation = 40;
+    public int WoodAccumulation = 5;
     private int WoodGained;
-    public float ChopingTime = 1f;
+    public float ChopingTime = 5f;
     float currentChopingTime = 0f;
     public float FindingTime = 2f;
     float currentFindingTime = 0f;

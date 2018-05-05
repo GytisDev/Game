@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f92d3c2d631c5344822b27e133bc0b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  growthTime: 5
+  growthTime: 25
   currTime: 0
   BerryBush: {fileID: 1999070103311584, guid: 26d05ff0457b98b4a985a3c08fe97686, type: 2}
 --- !u!114 &114236328825305914
@@ -147,7 +147,7 @@ MonoBehaviour:
   takesSpaceY: 1
   costWood: 0
   costStone: 0
-  placed: 0
+  placed: 1
 --- !u!208 &208893159142175468
 NavMeshObstacle:
   m_ObjectHideFlags: 1

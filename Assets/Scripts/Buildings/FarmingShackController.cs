@@ -12,15 +12,16 @@ public class FarmingShackController : MonoBehaviour {
     private bool landOccupied = false;
     GameObject[] AsignedCitizens = new GameObject[1];
     Grid grid;
+    ObjectOnGrid oog;
 
     private void Start() {
         grid = FindObjectOfType<Grid>();
         Fields = new List<FieldScript>();
+        oog = gameObject.GetComponent<ObjectOnGrid>();
     }
 
     // Update is called once per frame
     void Update() {
-        ObjectOnGrid oog = gameObject.GetComponent<ObjectOnGrid>();
         if (!oog.placed) return;
 
         if (!landOccupied && oog.placed) {

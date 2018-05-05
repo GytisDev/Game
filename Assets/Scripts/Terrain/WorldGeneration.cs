@@ -7,6 +7,8 @@ public class WorldGeneration : MonoBehaviour {
     public Grid grid;
     public GameObject LandBlocks;
     public GameObject tree;
+    public GameObject rock;
+    public GameObject bush;
     public Transform parent;
 
     private int width;
@@ -63,6 +65,8 @@ public class WorldGeneration : MonoBehaviour {
 		float[,] WorldNoiseMap = Noise.GenerateNoiseMap (width, height, seed, noiseScale, octaves, persistance, lacunarity, offset);
 		float[,] ForestsNoiseMap = Noise.GenerateNoiseMap (width, height, seed+1, noiseScale, octaves, persistance, lacunarity, offset);
 
+        Random rnd = new Random();
+
 		Objects = new GameObject [width, height];
 		Trees = new GameObject[width, height];
 		for (int x = 0; x < width; x++) {
@@ -99,15 +103,39 @@ public class WorldGeneration : MonoBehaviour {
 				if (Trees [x, y] != null) {
 					if (grid.IsWalkable (x, y)) 
 					{
-<<<<<<< HEAD
-						Instantiate(Trees[x, y], grid.GetNodePosition (x, y) + new Vector3(0, 0.5f, 0), Quaternion.Euler(new Vector3(-90, 0,0)), parent);
-=======
-						Instantiate(Trees[x, y], grid.GetNodePosition (x, y), Quaternion.Euler(new Vector3(-90, 0,0)), parent).GetComponent<ObjectOnGrid>().SetNodes(new Node[,] { { grid.GetNode(x,y)} });
->>>>>>> 7b04433b555179bd9cb9f24086239e6aa7fd6c8a
+						Instantiate(Trees[x, y], grid.GetNodePosition (x, y) + new Vector3(0, 0.5f, 0), Quaternion.Euler(new Vector3(-90, 0,0)), parent).GetComponent<ObjectOnGrid>().SetNodes(new Node[,] { { grid.GetNode(x,y)} });
 						grid.SetOccupied (x, y);
 					}
 				}
-			}
+
+                //Creates rocks
+                if(Random.Range(0, 1000) > 990) {
+                    if((x - 1 > 0 && x + 1 < width) && (y - 1 > 0 && y + 1 < height)) {
+                        for (int i = -1; i <= 1; i++) {
+                            for (int j = -1; j <= 1; j++) {
+                                if(grid.IsWalkable(x + i, y + j) && Random.Range(0, 100) > 50) {
+                                    Instantiate(rock, grid.GetNodePosition(x + i, y + j) + new Vector3(0, 0.5f, 0), Quaternion.Euler(new Vector3(0, Random.Range(0f, 180f), 0)), parent);
+                                    grid.SetOccupied(x + i, y + j);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //Creates bushes
+                if (Random.Range(0, 1000) > 990) {
+                    if ((x - 1 > 0 && x + 1 < width) && (y - 1 > 0 && y + 1 < height)) {
+                        for (int i = -1; i <= 1; i++) {
+                            for (int j = -1; j <= 1; j++) {
+                                if (grid.IsWalkable(x + i, y + j) && Random.Range(0, 100) > 50) {
+                                    Instantiate(bush, grid.GetNodePosition(x + i, y + j) + new Vector3(0, 0.5f, 0), Quaternion.Euler(new Vector3(0, Random.Range(0f, 180f), 0)), parent);
+                                    grid.SetOccupied(x + i, y + j);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 		}
 
     }

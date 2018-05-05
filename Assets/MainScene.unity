@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -8654,6 +8654,8 @@ MonoBehaviour:
   grid: {fileID: 1134222733}
   LandBlocks: {fileID: 1130190130904562, guid: 6e62d866fa5c2ce429aaed27ff9e6c8d, type: 2}
   tree: {fileID: 1250399867202540, guid: 18b941e032ec1a34ba36bec3fc37d0cd, type: 2}
+  rock: {fileID: 1265414524142958, guid: 72b2efbfa34fe4245a3d88ee2902d0d4, type: 2}
+  bush: {fileID: 1999070103311584, guid: 26d05ff0457b98b4a985a3c08fe97686, type: 2}
   parent: {fileID: 1629232730}
   noiseScale: 25
   octaves: 5

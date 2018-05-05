@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class CivilianBuildingScript : MonoBehaviour {
 
+    public int hasSpace = 2;
+
     PopulationManager popc;
     bool added;
+    ObjectOnGrid oog;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         added = false;
         popc = FindObjectOfType<PopulationManager>();
+        oog = gameObject.GetComponent<ObjectOnGrid>();
     }
 
     void Update()
     {
-        ObjectOnGrid oog = gameObject.GetComponent<ObjectOnGrid>();
         if (!oog.placed) return;
         else
         {
@@ -27,7 +30,7 @@ public class CivilianBuildingScript : MonoBehaviour {
     {
         if (added == false)
         {
-            popc.IncreasePopulationLimit(5);
+            popc.IncreasePopulationLimit(hasSpace);
             added = true;
         }
     }

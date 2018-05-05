@@ -9,7 +9,7 @@ public class ForesterScript : MonoBehaviour {
     public ForestersHutScript fhs;
     public GameObject citizen;
     public int Radius;
-    public float PlantingTime = 1f;
+    public float PlantingTime = 4f;
     public float FindingTime = 2f;
 
     ResourceManager rm;

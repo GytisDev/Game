@@ -43,6 +43,7 @@ public class TreeScript : MonoBehaviour {
             quantity = woodLeft;
         woodLeft -= quantity;
 
+        available = true;
         return quantity;
     }
 

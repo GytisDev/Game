@@ -10,9 +10,9 @@ public class MasonScript : MonoBehaviour {
     public MasonsHutController mhc;
     public GameObject citizen;
     public int Radius = 8;
-    public int StoneAccumulation = 40;
+    public int StoneAccumulation = 4;
     private int StoneGained;
-    public float MiningTime = 1f;
+    public float MiningTime = 8f;
     float currentMiningTime = 0f;
     public float FindingTime = 2f;
     float currentFindingTime = 0f;

@@ -41,7 +41,7 @@ public class FortressScript : MonoBehaviour {
 
     void SpawnCitizens(int count) {
         for (int i = 0; i < count; i++) {
-            Instantiate(citizen, SpawnPosition.position, Quaternion.identity);
+            Instantiate(citizen, SpawnPosition.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
         }
     }
 }

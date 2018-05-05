@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1e5f0712b2e1d42aae8e4b86f67166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  growthTime: 2
+  growthTime: 30
   currTime: 0
   YoungTree2: {fileID: 1664302256145910, guid: 99a1ff29bbad1814595996832adf7fc2, type: 2}
 --- !u!114 &114744185267475152

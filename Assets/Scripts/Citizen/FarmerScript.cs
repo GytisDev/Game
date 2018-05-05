@@ -15,9 +15,9 @@ public class FarmerScript : MonoBehaviour {
 
     public States state;
 
-    public float plantingTime = 0f;
-    public float cultivatingTime = 0f;
-    public float cuttingTime = 0f;
+    public float plantingTime = 4f;
+    public float cultivatingTime = 4f;
+    public float cuttingTime = 2f;
     public float timerToWork = 0.5f;
 
     float currentWorkingTime = 0;

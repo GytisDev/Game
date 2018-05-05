@@ -125,10 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e552560d5e9271d4bbe0193aa03ddc75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseFood: 80
-  foodLeft: 80
+  baseFood: 12
+  foodLeft: 12
   available: 1
-  growthTime: 5
+  growthTime: 25
   currTime: 0
   BushWithoutBerries: {fileID: 1811963768538502, guid: 7f75fc5074a8c514d859e7348c0a4ab7,
     type: 2}
@@ -151,7 +151,7 @@ MonoBehaviour:
   takesSpaceY: 1
   costWood: 0
   costStone: 0
-  placed: 0
+  placed: 1
 --- !u!208 &208659614498145296
 NavMeshObstacle:
   m_ObjectHideFlags: 1

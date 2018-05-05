@@ -33,7 +33,6 @@ public class CameraRTS : MonoBehaviour
                 offsetPosition.y -= scrollSpeed * Time.deltaTime;
                 offsetPosition.z += scrollSpeed * 0.5f * Time.deltaTime;
             }
-            Debug.Log("y: " + pos.y);
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
@@ -43,7 +42,6 @@ public class CameraRTS : MonoBehaviour
                 offsetPosition.y += scrollSpeed * Time.deltaTime;
                 offsetPosition.z -= scrollSpeed * 0.5f * Time.deltaTime;
             }
-            Debug.Log("y: " + pos.y);
                 pos -= transform.forward * scrollSpeed * Time.deltaTime;
         }
 
@@ -70,6 +68,10 @@ public class CameraRTS : MonoBehaviour
         if (offsetPositionSpace == Space.Self)
         {
             transform.position = Vector3.Lerp(transform.position, target.TransformPoint(offsetPosition), 0.5f);
+            if (transform.position.y < minY || transform.position.y > maxY) {
+
+                transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, minY, maxY), transform.position.z);
+            }
         }
         else
         {

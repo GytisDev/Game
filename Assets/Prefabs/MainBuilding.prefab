@@ -130,9 +130,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed6f4b2b0932751418907c7169966026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  citizen: {fileID: 4791586018311432, guid: 2607eb4a935c26545af1a1959c3475e7, type: 2}
+  citizen: {fileID: 4195407134953220, guid: 1c4d32c0be9afd544bd0b768aaef9f94, type: 2}
   citizenCount: 2
   SpawnPosition: {fileID: 4906289575268350}
+  spawnTime: 5
+  currentSpawnTime: 0
   spawnCitizens: 1
 --- !u!114 &114055293700225216
 MonoBehaviour:

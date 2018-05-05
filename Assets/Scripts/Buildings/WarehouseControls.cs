@@ -6,16 +6,16 @@ public class WarehouseControls : MonoBehaviour {
 
     ResourceManager rm;
     bool added = false;
+    ObjectOnGrid oog;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         rm = FindObjectOfType<ResourceManager>();
-
+        oog = gameObject.GetComponent<ObjectOnGrid>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        ObjectOnGrid oog = gameObject.GetComponent<ObjectOnGrid>();
         if (!oog.placed) return;
         else
         {

@@ -9,12 +9,15 @@ public class ForestersHutScript : MonoBehaviour {
     public int Radius = 12;
     private bool citizenAsigned = false;
     GameObject[] AsignedCitizens = new GameObject[1];
+    ObjectOnGrid oog;
 
+    private void Start() {
+        oog = gameObject.GetComponent<ObjectOnGrid>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        ObjectOnGrid oog = gameObject.GetComponent<ObjectOnGrid>();
         if (!oog.placed) return;
 
         if (!citizenAsigned)

@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d348ed2879d357e4096c6c70b017485c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stoneLeft: 50
+  stoneLeft: 100
   available: 1
 --- !u!114 &114524698334577626
 MonoBehaviour:
@@ -147,7 +147,7 @@ MonoBehaviour:
   takesSpaceY: 1
   costWood: 0
   costStone: 0
-  placed: 0
+  placed: 1
 --- !u!208 &208808419105534904
 NavMeshObstacle:
   m_ObjectHideFlags: 1

@@ -10,8 +10,8 @@ public class GatherersScript : MonoBehaviour {
     public GatherersHutController hut;
     public GameObject citizen;
     public int Radius = 30;
-    public float GatheringTime = 1f;
-    public int FoodAccumulation = 40;
+    public float GatheringTime = 3f;
+    public int FoodAccumulation = 3;
     private int FoodGained;
     float currentGatheringTime = 0;
     bool hasWorkToDo = false;

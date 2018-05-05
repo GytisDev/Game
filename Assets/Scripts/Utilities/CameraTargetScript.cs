@@ -56,11 +56,11 @@ public class CameraTargetScript : MonoBehaviour
             dir = -transform.right;
             pos += dir * panSpeed * _heightKoef * Time.deltaTime;
         }
-        if (Input.GetKey("q") || (Input.mousePosition.x <= panBorderThickness && panningWithMouse))
+        if (Input.GetKey("e") || (Input.mousePosition.x <= panBorderThickness && panningWithMouse))
         {
             transform.Rotate(Vector3.up, 150f * Time.deltaTime);
         }
-        if (Input.GetKey("e") || (Input.mousePosition.x <= panBorderThickness && panningWithMouse))
+        if (Input.GetKey("q") || (Input.mousePosition.x <= panBorderThickness && panningWithMouse))
         {
             transform.Rotate(Vector3.down, 150f * Time.deltaTime);
         }

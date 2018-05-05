@@ -6,15 +6,15 @@ public class GatherersHutController : MonoBehaviour {
 
     public GameObject InitialPosition;      // The position where citizen should initially come at work
     private bool citizenAsigned = false;
+    ObjectOnGrid oog;
 
     // Use this for initialization
     void Start () {
-		
-	}
+        oog = gameObject.GetComponent<ObjectOnGrid>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        ObjectOnGrid oog = gameObject.GetComponent<ObjectOnGrid>();
         if (!oog.placed) return;
 
         if (!citizenAsigned)

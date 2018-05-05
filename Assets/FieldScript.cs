@@ -17,7 +17,7 @@ public class FieldScript : MonoBehaviour {
     void Start() {
         stage = Stage.None;
         timer = 0;
-        growTime = Random.Range(20, 26);
+        growTime = Random.Range(40, 46);
     }
 
     // Update is called once per frame
@@ -51,7 +51,7 @@ public class FieldScript : MonoBehaviour {
                 transform.localScale = new Vector3(2f, 0.6f, 2f);
                 break;
             case Stage.Grown:
-                foodYield = Random.Range(7, 12);
+                foodYield = Random.Range(5, 8);
                 ChangeMesh(models[3]);
                 transform.localScale = new Vector3(2f, 1f, 2f);
                 break;
