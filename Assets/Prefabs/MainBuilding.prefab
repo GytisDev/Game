@@ -133,6 +133,11 @@ MonoBehaviour:
   citizen: {fileID: 4195407134953220, guid: 1c4d32c0be9afd544bd0b768aaef9f94, type: 2}
   citizenCount: 2
   SpawnPosition: {fileID: 4906289575268350}
+  Ranges:
+  - 20
+  - 40
+  - 80
+  Level: 1
   spawnTime: 5
   currentSpawnTime: 0
   spawnCitizens: 1
@@ -162,7 +167,7 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1262284124019650}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 10.25, y: 10.811001, z: 5}

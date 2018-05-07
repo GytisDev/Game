@@ -7,6 +7,8 @@ public class FortressScript : MonoBehaviour {
     public Transform citizen;
     public int citizenCount;
     public Transform SpawnPosition;
+    public float[] Ranges = new float[] { 10f, 20f };
+    public int Level = 1;
     private PopulationManager PopManager;
 
     public float spawnTime = 5f;

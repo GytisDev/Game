@@ -132,8 +132,6 @@ MonoBehaviour:
   objectName: FarmerShack
   takesSpaceX: 1
   takesSpaceY: 1
-  occupiesSpaceX: 0
-  occupiesSpaceY: 0
   costWood: 50
   costStone: 20
   placed: 0
@@ -158,7 +156,7 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1792079430891212}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 1.7010001, y: 1.6710001, z: 5.9230003}

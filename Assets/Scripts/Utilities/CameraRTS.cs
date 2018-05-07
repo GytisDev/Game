@@ -67,6 +67,7 @@ public class CameraRTS : MonoBehaviour
         // compute position
         if (offsetPositionSpace == Space.Self)
         {
+            //offsetPosition.y = Mathf.Clamp(offsetPosition.y, minY, maxY);
             transform.position = Vector3.Lerp(transform.position, target.TransformPoint(offsetPosition), 0.5f);
             if (transform.position.y < minY || transform.position.y > maxY) {
 

@@ -123,13 +123,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f71cc6ac7370c34ba3b219b5de41fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasSpace: 2
 --- !u!208 &208227048538729748
 NavMeshObstacle:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1700021960466360}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 10.1310005, y: 8.913, z: 7.9330006}
