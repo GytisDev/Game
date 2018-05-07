@@ -9,6 +9,14 @@ public class ResourceManager : MonoBehaviour {
     public Text stonetext;
     public Text foodtext;
 
+    public int woodKoef;
+    public int stoneKoef;
+    public int foodKoef;
+    public int oneScorePointValue;
+    private int currentScoreAcc;
+
+    private ScoreManager scoreManager;
+
     public enum Resources {
         Wood,
         Food, 
@@ -21,6 +29,8 @@ public class ResourceManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         UpdateFormat();
+        scoreManager = FindObjectOfType<ScoreManager>();
+        currentScoreAcc = 0;
 	}
 	
 	// Update is called once per frame
@@ -47,12 +57,15 @@ public class ResourceManager : MonoBehaviour {
         switch (resource) {
             case Resources.Wood:
                 wood += amount;
+                if(amount > 0) currentScoreAcc += amount * woodKoef;
                 break;
             case Resources.Food:
                 food += amount;
+                if (amount > 0) currentScoreAcc += amount * foodKoef;
                 break;
             case Resources.Stone:
                 stone += amount;
+                if (amount > 0) currentScoreAcc += amount * stoneKoef;
                 break;
             case Resources.Storage:
                 storage += amount;
@@ -60,6 +73,9 @@ public class ResourceManager : MonoBehaviour {
             default:
                 return;
         }
+
+        scoreManager.AddScore(currentScoreAcc / oneScorePointValue);
+        currentScoreAcc %= oneScorePointValue;
 
         UpdateFormat();
     }

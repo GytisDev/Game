@@ -12,6 +12,7 @@ public class BuildingPlacement : MonoBehaviour {
     public Transform currentBuilding;
     public Grid grid;
     private ResourceManager rm;
+    private ScoreManager scoreManager;
     bool placed = false;
     Vector3 FortressPos;
     static GameObject[] Build0s, Build1s;
@@ -20,6 +21,7 @@ public class BuildingPlacement : MonoBehaviour {
     // Use this for initialization
     void Start() {
         rm = FindObjectOfType<ResourceManager>();
+        scoreManager = FindObjectOfType<ScoreManager>();
         //variableForPrefab = (GameObject)Resources.Load("prefabs/prefab1", typeof(GameObject));
         //Build0 = (GameObject)Resources.Load("Assets/Prefabs/Build0", typeof(GameObject));
         if (!indicatorsCreated)
@@ -94,6 +96,7 @@ public class BuildingPlacement : MonoBehaviour {
                     rm.DecreaseResources(ResourceManager.Resources.Stone, oog.costStone);
                     oog.placed = true;
                     navMeshObstacle.enabled = true;
+                    scoreManager.AddScore(oog.scoreBonus);
 
                     currentBuilding = null;
                     resetRest(0, 0);

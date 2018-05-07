@@ -13,16 +13,20 @@ public class FarmingShackController : MonoBehaviour {
     GameObject[] AsignedCitizens = new GameObject[1];
     Grid grid;
     ObjectOnGrid oog;
+    bool statisticAdded;
 
     private void Start() {
         grid = FindObjectOfType<Grid>();
         Fields = new List<FieldScript>();
         oog = gameObject.GetComponent<ObjectOnGrid>();
+        statisticAdded = false;
     }
 
     // Update is called once per frame
     void Update() {
         if (!oog.placed) return;
+
+        if (!statisticAdded) { StatisticsManager.FarmingShackCountr++; statisticAdded = true; }
 
         if (!landOccupied && oog.placed) {
             landOccupied = true;

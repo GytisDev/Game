@@ -10,15 +10,19 @@ public class ForestersHutScript : MonoBehaviour {
     private bool citizenAsigned = false;
     GameObject[] AsignedCitizens = new GameObject[1];
     ObjectOnGrid oog;
+    bool statisticAdded;
 
     private void Start() {
         oog = gameObject.GetComponent<ObjectOnGrid>();
+        statisticAdded = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (!oog.placed) return;
+
+        if (!statisticAdded) { StatisticsManager.ForestersHutCount++; statisticAdded = true; }
 
         if (!citizenAsigned)
         {

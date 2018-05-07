@@ -29,6 +29,7 @@ public class FortressScript : MonoBehaviour {
             return;
 
 		if(oog.placed && spawnCitizens) {
+            StatisticsManager.ForestersHutCount++;
             SpawnCitizens(citizenCount);
             spawnCitizens = false;
         }

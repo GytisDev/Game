@@ -8,15 +8,18 @@ public class WoodCutterHutController : MonoBehaviour {
     private bool citizenAsigned = false;
     GameObject[] AsignedCitizens = new GameObject[1];
     ObjectOnGrid oog;
-
+    bool statisticAdded;
 
     private void Start() {
         oog = gameObject.GetComponent<ObjectOnGrid>();
+        statisticAdded = false;
     }
 
     // Update is called once per frame
     void Update () {
         if (!oog.placed) return;
+
+        if (!statisticAdded) { StatisticsManager.WoodCutterHutCount++; statisticAdded = true; }
 
         if (!citizenAsigned)
         {

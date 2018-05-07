@@ -8,11 +8,13 @@ public class CivilianBuildingScript : MonoBehaviour {
 
     PopulationManager popc;
     bool added;
+    bool statisticAdded;
     ObjectOnGrid oog;
 
     // Use this for initialization
     void Start () {
         added = false;
+        statisticAdded = false;
         popc = FindObjectOfType<PopulationManager>();
         oog = gameObject.GetComponent<ObjectOnGrid>();
     }
@@ -22,6 +24,7 @@ public class CivilianBuildingScript : MonoBehaviour {
         if (!oog.placed) return;
         else
         {
+            if (!statisticAdded) { StatisticsManager.CivilianBuildingCount++; statisticAdded = true; }
             AddSpace();
         }
     }

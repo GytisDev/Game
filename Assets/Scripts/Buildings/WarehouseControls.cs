@@ -7,11 +7,13 @@ public class WarehouseControls : MonoBehaviour {
     ResourceManager rm;
     bool added = false;
     ObjectOnGrid oog;
+    bool statisticAdded;
 
     // Use this for initialization
     void Start () {
         rm = FindObjectOfType<ResourceManager>();
         oog = gameObject.GetComponent<ObjectOnGrid>();
+        statisticAdded = false;
     }
 	
 	// Update is called once per frame
@@ -19,6 +21,7 @@ public class WarehouseControls : MonoBehaviour {
         if (!oog.placed) return;
         else
         {
+            if (!statisticAdded) { StatisticsManager.WarehouseCount++; statisticAdded = true; }
             AddStorage();
         }
     }

@@ -13,6 +13,7 @@ public class ObjectOnGrid : MonoBehaviour{
     public string objectName;
     public int takesSpaceX, takesSpaceY;
     public int costWood, costStone;
+    public int scoreBonus;
     public Node[,] Nodes;
 
     public bool placed = false;
