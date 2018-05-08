@@ -40,8 +40,8 @@ public class HappinessManager : MonoBehaviour {
     void CalculateHappiness()
     {
         happiness = 50;
-        if (popc.popLimit - popc.population > popc.population) happiness += 30;
-        if (popc.popLimit - popc.population < popc.population / 5) happiness -= 30;
+        if (popc.popLimit - popc.population > 0) happiness += 30;
+        if (popc.population > popc.popLimit) happiness -= 30;
         if (rm.food == 0) happiness -= 60;
 
     }

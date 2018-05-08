@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FortressScript : MonoBehaviour {
+public class FortressScript : MonoBehaviour
+{
 
     public Transform citizen;
     public int citizenCount;
@@ -10,40 +11,73 @@ public class FortressScript : MonoBehaviour {
     public float[] Ranges = new float[] { 10f, 20f };
     public int Level = 1;
     private PopulationManager PopManager;
+    //public GameObject ActionsMenu;
+    //private bool aac = false;
 
+    private bool isplaced = false;
     public float spawnTime = 5f;
     public float currentSpawnTime = 0f;
     ObjectOnGrid oog;
     public bool spawnCitizens = true;
+    private GameObject button;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         oog = GetComponent<ObjectOnGrid>();
         PopManager = FindObjectOfType<PopulationManager>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    /*void OnMouseDown()
+    {
+        if (!oog.placed)
+            return;
+        if (!aac)
+        {
+            ActionsMenu.SetActive(true);
+            aac = true;
+        }
+        else
+        {
+            ActionsMenu.SetActive(false);
+            aac = false;
+        }
+    */
+
+    // Update is called once per frame
+    void Update()
+    {
 
         if (!oog.placed)
             return;
 
-		if(oog.placed && spawnCitizens) {
+        if (!isplaced)
+        {
+            button = GameObject.FindWithTag("FortressButton");
+            button.SetActive(false);
+            isplaced = true;
+        }
+
+        if (oog.placed && spawnCitizens)
+        {
             StatisticsManager.ForestersHutCount++;
             SpawnCitizens(citizenCount);
             spawnCitizens = false;
         }
 
-        if(currentSpawnTime >= spawnTime && !PopManager.isPopLimitReached()) {
+        if (currentSpawnTime >= spawnTime && !PopManager.isPopLimitReached())
+        {
             SpawnCitizens(1);
             currentSpawnTime = 0f;
         }
 
         currentSpawnTime += Time.deltaTime;
-	}
+    }
 
-    void SpawnCitizens(int count) {
-        for (int i = 0; i < count; i++) {
+    void SpawnCitizens(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
             Instantiate(citizen, SpawnPosition.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
         }
     }

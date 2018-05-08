@@ -31,7 +31,11 @@ public class ResourceManager : MonoBehaviour {
         UpdateFormat();
         scoreManager = FindObjectOfType<ScoreManager>();
         currentScoreAcc = 0;
-	}
+        if (woodKoef == 0) woodKoef = 1;
+        if (stoneKoef == 0) stoneKoef = 1;
+        if (foodKoef == 0) foodKoef = 1;
+        if (oneScorePointValue == 0) oneScorePointValue = 1;
+    }
 	
 	// Update is called once per frame
 	void Update () {

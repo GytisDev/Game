@@ -160,6 +160,7 @@ MonoBehaviour:
   takesSpaceY: 4
   costWood: 0
   costStone: 0
+  scoreBonus: 0
   placed: 0
 --- !u!208 &208437270850846190
 NavMeshObstacle:
