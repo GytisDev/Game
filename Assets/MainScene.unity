@@ -8962,14 +8962,14 @@ MonoBehaviour:
   seed: 864551482
   offset: {x: 0, y: 0}
   autoUpdate: 1
-  ForestsHeights: {x: 0.6, y: 1}
+  ForestsHeights: {x: 0.55, y: 1}
   TreesPerForest: {x: 20, y: 40}
   regions:
   - name: Grass
-    height: {x: 0.6, y: 1}
+    height: {x: 0.5, y: 1}
     gObject: {fileID: 1130190130904562, guid: 6e62d866fa5c2ce429aaed27ff9e6c8d, type: 2}
   - name: Sand
-    height: {x: 0.57, y: 0.6}
+    height: {x: 0.47, y: 0.5}
     gObject: {fileID: 1752161905464204, guid: f2673f5e4af95274eab4562b04ce3581, type: 2}
 --- !u!4 &2133997463
 Transform:
