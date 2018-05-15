@@ -131,6 +131,15 @@ public class BuildingPlacement : MonoBehaviour {
 
     public void SetItem(GameObject b) {
         lastBuilding = b;
+        BuildingPlacement[] BP = FindObjectsOfType<BuildingPlacement>();
+        for (int i = 0; i < BP.Length; i++)
+        {
+            if (BP[i].currentBuilding != null)
+            {
+                Destroy(BP[i].currentBuilding.gameObject);
+            }
+        }
+
         currentBuilding = Instantiate(b).transform;
         placed = false;
     }

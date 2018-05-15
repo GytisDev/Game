@@ -52,7 +52,7 @@ public class BuildingOnClick : MonoBehaviour {
 
     public void TaskOnClick()
     {
-        buildingPlacement.currentBuilding = null;
+        //buildingPlacement.currentBuilding = null;
 
         ObjectOnGrid ong = building.GetComponent<ObjectOnGrid>();
 
