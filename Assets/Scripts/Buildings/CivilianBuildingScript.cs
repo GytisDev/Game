@@ -10,6 +10,7 @@ public class CivilianBuildingScript : MonoBehaviour {
     bool added;
     bool statisticAdded;
     ObjectOnGrid oog;
+    ResourceManager rm;
 
     // Use this for initialization
     void Start () {
@@ -17,6 +18,8 @@ public class CivilianBuildingScript : MonoBehaviour {
         statisticAdded = false;
         popc = FindObjectOfType<PopulationManager>();
         oog = gameObject.GetComponent<ObjectOnGrid>();
+        rm = gameObject.GetComponent<ResourceManager>();
+
     }
 
     void Update()
@@ -27,6 +30,16 @@ public class CivilianBuildingScript : MonoBehaviour {
             if (!statisticAdded) { StatisticsManager.CivilianBuildingCount++; statisticAdded = true; }
             AddSpace();
         }
+        /*
+        if (dc.iscold == true) 
+        {
+            cold += Time.deltaTime;
+            if ((cold >= 5) && (rm.wood > 0))
+            {
+                rm.DecreaseResources(ResourceManager.Resources.Wood, 1);
+                cold = 0;
+            }
+        }*/
     }
 
     void AddSpace()

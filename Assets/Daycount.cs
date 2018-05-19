@@ -17,11 +17,15 @@ public class Daycount : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Sun.transform.position.y < 0) end = true;
+        if (Sun.transform.position.y < 0)
+        {
+            end = true;
+        }
         if (end && Sun.transform.position.y > 0)
         {
             day++;
             end = false;
+
         }
         Count.text = day.ToString();
     }

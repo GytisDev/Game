@@ -2,8 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AchievementManager : MonoBehaviour {
+
+    public Text AchievementsText;
 
     public Achievement[] Achievements = new Achievement[] {
         new Achievement(20, 0f, "Build a Gatherer's Hut", () => {
@@ -34,6 +37,22 @@ public class AchievementManager : MonoBehaviour {
             return StatisticsManager.CivilianCount >= 15;
         })
     };
+
+    void Update()
+    {
+        AchievementsText.text = "";
+        int entrycount = 0;
+        foreach (Achievement ach in Achievements)
+        {
+            if ((ach.Done == false) && (entrycount <= 9))
+            {
+                AchievementsText.text += "-" + ach.Description + "\n";
+                entrycount++;
+            }
+        }
+
+
+    }
 
     ScoreManager scoreManager;
 
