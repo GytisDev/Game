@@ -41,7 +41,10 @@ public class Unit : MonoBehaviour {
     }
 
     public void MoveTo(Vector3 position) {
-        agent.destination = position;
+        if (position != null)
+            agent.destination = position;
+        else
+            Debug.Log("Unit -> MoveTo() : position is null");
     }
 
     public bool ArrivedAtTarget() {

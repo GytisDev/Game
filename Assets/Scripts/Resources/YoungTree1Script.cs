@@ -29,13 +29,13 @@ public class YoungTree1Script : MonoBehaviour {
                 oog2.placed = true;
                 oog2.SetNodes(oog.Nodes);
 
-                for (int i = 0; i < oog2.Nodes.GetLength(0); i++)
-                {
-                    for (int j = 0; j < oog2.Nodes.GetLength(1); j++)
-                    {
-                        Debug.Log("i: " + i + " j: " + j + " | grid x:" + oog2.Nodes[i , j].gridX + " grid y: " + oog2.Nodes[i , j].gridY);
-                    }
-                }
+                //for (int i = 0; i < oog2.Nodes.GetLength(0); i++)
+                //{
+                //    for (int j = 0; j < oog2.Nodes.GetLength(1); j++)
+                //    {
+                //        //Debug.Log("i: " + i + " j: " + j + " | grid x:" + oog2.Nodes[i , j].gridX + " grid y: " + oog2.Nodes[i , j].gridY);
+                //    }
+                //}
 
                 Destroy(gameObject);
             }

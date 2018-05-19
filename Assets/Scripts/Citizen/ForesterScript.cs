@@ -17,7 +17,7 @@ public class ForesterScript : MonoBehaviour {
     float currentFindingTime = 0f;
     bool hasWorkToDo = false;
     bool noSpaceInArea = false;
-    GameObject newTreeLocation;
+    public GameObject newTreeLocation;
     Node targetNode = null;
     Unit unit;
 
@@ -67,7 +67,7 @@ public class ForesterScript : MonoBehaviour {
                 if (ArrivedAtTarget(newTreeLocation))
                 {
                     state = States.Working;
-                    Debug.Log("Arived at tree planting location");
+                    //Debug.Log("Arived at tree planting location");
                 }
                 break;
 
@@ -133,7 +133,7 @@ public class ForesterScript : MonoBehaviour {
     }
 
     
-    void FindPlaceForTree2()
+    public void FindPlaceForTree2()
     {
         newTreeLocation = null;
         targetNode = null;

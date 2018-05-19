@@ -3,36 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreManager : MonoBehaviour {
+public class ScoreManager : MonoBehaviour
+{
 
     public int ScoreGoal;
-    public int ScoreCurrent;
+    public float ScoreCurrent;
     public float TimeLimit;
     public float TimeCurrent;
-    public Text Scoretext;
-    public int timemin;
+    public Slider scoreslider;
+    public Slider timeslider;
     // Use this for initialization
-	void Start () {
+    void Start()
+    {
         ScoreCurrent = 0;
         TimeCurrent = 0;
-        timemin = 0;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        //timemin = 0;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
         TimeCurrent += Time.deltaTime;
-        if (TimeCurrent >= 60)
-        {
-            timemin += 1;
-            TimeCurrent -= 60;
-        }
 
-        if (timemin >= TimeLimit)
+        if (TimeCurrent >= TimeLimit)
             GameOver();
-        Debug.Log("Score:   " + ScoreCurrent + "/" + ScoreGoal + "\n" + "Time:  " + TimeCurrent + "/" + TimeLimit);
-        Scoretext.text = "Score: " + ScoreCurrent + " / " + ScoreGoal + " \n" + "Time: " + timemin + " min " + Mathf.Round(TimeCurrent) + " sec " + "/" + TimeLimit + " min ";
-	}
+        scoreslider.value = ScoreCurrent / ScoreGoal;
+        timeslider.value = 1 - (TimeCurrent) / (TimeLimit);
+    }
 
     public void AddScore(int points)
     {
@@ -51,7 +49,8 @@ public class ScoreManager : MonoBehaviour {
         if (ScoreCurrent < ScoreGoal)
         {
             Debug.Log("Game Lost!");
-        } else
+        }
+        else
         {
             Debug.Log("You win!");
         }

@@ -78,7 +78,7 @@ public class ObjectOnGrid : MonoBehaviour{
                 try
                 {
                     this.Nodes[i, j] = Nodes[i, j];
-                    Debug.Log("Nodes[i,j] x = " + this.Nodes[i, j].gridX + "Nodes[i,j] y = " + this.Nodes[i, j].gridY);
+                    //Debug.Log("Nodes[i,j] x = " + this.Nodes[i, j].gridX + "Nodes[i,j] y = " + this.Nodes[i, j].gridY);
                 }
                 catch (System.Exception)
                 {

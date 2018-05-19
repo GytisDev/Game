@@ -57,7 +57,7 @@ public class GatherersScript : MonoBehaviour {
                 if (ArrivedAtTarget(currentBush))
                 {
                     state = States.Working;
-                    Debug.Log("Arived at the bush");
+                    //Debug.Log("Arived at the bush");
                 }
                 break;
 
@@ -100,7 +100,7 @@ public class GatherersScript : MonoBehaviour {
 
             if (currentBush == null) return;
 
-            Debug.Log("Bush found");
+            //Debug.Log("Bush found");
 
             //Unit unit = citizen.GetComponent<Unit>();
             unit.MoveTo(currentBush.transform.position);
@@ -155,7 +155,6 @@ public class GatherersScript : MonoBehaviour {
         currentGatheringTime = 0f;
         state = States.CarryingGoods;
 
-        //Unit unit = citizen.GetComponent<Unit>();
         unit.MoveTo(hut.InitialPosition.transform.position);
     }
 
@@ -163,7 +162,7 @@ public class GatherersScript : MonoBehaviour {
     {
         // Here you can update resourses using
         // FoodGained - food gained from last trip
-        Debug.Log("Goods arrived");
+        //Debug.Log("Goods arrived");
 
         rm.IncreaseResources(ResourceManager.Resources.Food, FoodGained);
     }

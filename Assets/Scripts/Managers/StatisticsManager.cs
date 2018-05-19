@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class StatisticsManager {
 
+    public static int CivilianCount = 0;
+
     public static int CivilianBuildingCount = 0;
     public static int FarmingShackCountr = 0;
     public static int ForestersHutCount = 0;
