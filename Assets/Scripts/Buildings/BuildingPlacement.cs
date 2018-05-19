@@ -71,18 +71,17 @@ public class BuildingPlacement : MonoBehaviour {
 
                 if (Fortress != null)
                 {
-                    //if (Vector3.Distance(Fortress.transform.position, currentBuilding.transform.position) > Fortress.Ranges[Fortress.Level - 1])
-                    //    return;
-
+                    //Debug.Log("Checking distance...");
                     if (!grid.CheckDistance(rayPointNode.gridX, rayPointNode.gridY, data.takesSpaceX, data.takesSpaceY, Fortress.transform.position, Fortress.Ranges[Fortress.Level - 1]))
                         return;
 
-                    Debug.Log("qafdasdagasdfgasfg");
+                    //Debug.Log("Distance ok. Checking path...");
                     FortressPos = Fortress.SpawnPosition.position;
                     NavMeshPath path = new NavMeshPath();
                     NavMesh.CalculatePath(FortressPos, currentBuilding.transform.position, NavMesh.AllAreas, path);
                     if (path.status != NavMeshPathStatus.PathComplete)
                         return;
+                    //Debug.Log("Path ok.");
                 }
 
                 if (grid.UpdateGrid(rayPointNode.gridX, rayPointNode.gridY, data.takesSpaceX, data.takesSpaceY)) {

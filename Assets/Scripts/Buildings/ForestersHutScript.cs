@@ -9,7 +9,7 @@ public class ForestersHutScript : MonoBehaviour {
     public int Radius = 12;
     private bool citizenAsigned = false;
     GameObject[] AsignedCitizens = new GameObject[1];
-    ObjectOnGrid oog;
+    public ObjectOnGrid oog;
     bool statisticAdded;
 
     private void Start() {

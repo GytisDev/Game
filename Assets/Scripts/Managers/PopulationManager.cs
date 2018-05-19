@@ -23,11 +23,13 @@ public class PopulationManager : MonoBehaviour {
     public void DecreasePopulation(int i)
     {
         population -= i;
+        StatisticsManager.CivilianCount -= i;
     }
 
     public void IncreasePopulation(int i)
     {
         population += i;
+        StatisticsManager.CivilianCount += i;
     }
 
     public void DecreasePopulationLimit(int i)

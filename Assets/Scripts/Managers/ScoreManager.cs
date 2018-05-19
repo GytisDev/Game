@@ -30,7 +30,7 @@ public class ScoreManager : MonoBehaviour {
 
         if (timemin >= TimeLimit)
             GameOver();
-        Debug.Log("Score:   " + ScoreCurrent + "/" + ScoreGoal + "\n" + "Time:  " + TimeCurrent + "/" + TimeLimit);
+        //Debug.Log("Score:   " + ScoreCurrent + "/" + ScoreGoal + "\n" + "Time:  " + TimeCurrent + "/" + TimeLimit);
         Scoretext.text = "Score: " + ScoreCurrent + " / " + ScoreGoal + " \n" + "Time: " + timemin + " min " + Mathf.Round(TimeCurrent) + " sec " + "/" + TimeLimit + " min ";
 	}
 

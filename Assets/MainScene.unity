@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731224, g: 0.38074207, b: 0.35872674, a: 1}
+  m_IndirectSpecularColor: {r: 0.37312284, g: 0.3807422, b: 0.35872623, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -364,6 +364,46 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.000030517578}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &187836576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 187836577}
+  - component: {fileID: 187836578}
+  m_Layer: 0
+  m_Name: AchievementManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &187836577
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 187836576}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2133997463}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &187836578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 187836576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9532b5f1c2b3f3f4682c09b571383193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &197493989 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: c0a48d7d53dd2d0418c863f75402bde1, type: 3}
@@ -4349,7 +4389,7 @@ GameObject:
   - component: {fileID: 1003578819}
   - component: {fileID: 1003578818}
   m_Layer: 0
-  m_Name: Farming hut
+  m_Name: Farming shack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4453,7 +4493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info: {fileID: 958679962}
   infobar: {fileID: 1551535276}
-  message: Farming hut
+  message: Farming shack
   building: {fileID: 1792079430891212, guid: d46a380e1c827ae40a654146f97d2185, type: 2}
 --- !u!114 &1003578821
 MonoBehaviour:
@@ -8985,6 +9025,7 @@ Transform:
   - {fileID: 1428239865}
   - {fileID: 1544769957}
   - {fileID: 1941014847}
+  - {fileID: 187836577}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

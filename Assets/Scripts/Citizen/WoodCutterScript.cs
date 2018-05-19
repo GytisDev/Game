@@ -71,7 +71,7 @@ public class WoodCutterScript : MonoBehaviour {
                 if (ArrivedAtTarget(currenTree))
                 {
                     state = States.Working;
-                    Debug.Log("Arived at tree");
+                    //Debug.Log("Arived at tree");
                 }
                 else
                 {
@@ -218,7 +218,7 @@ public class WoodCutterScript : MonoBehaviour {
     {
         // Here you can update resourses using
         // WoodGained - wood gained from last trip
-        Debug.Log("Goods arrived");
+        //Debug.Log("Goods arrived");
 
         rm.IncreaseResources(ResourceManager.Resources.Wood, WoodGained);
 

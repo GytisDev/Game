@@ -70,7 +70,7 @@ public class MasonScript : MonoBehaviour {
                 if (ArrivedAtTarget(currentRock))
                 {
                     state = States.Working;
-                    Debug.Log("Arived at the rock");
+                    //Debug.Log("Arived at the rock");
                 }
                 break;
 
@@ -211,7 +211,7 @@ public class MasonScript : MonoBehaviour {
     {
         // Here you can update resourses using
         // WoodGained - wood gained from last trip
-        Debug.Log("Goods arrived");
+        //Debug.Log("Goods arrived");
 
         rm.IncreaseResources(ResourceManager.Resources.Stone, StoneGained);
 
