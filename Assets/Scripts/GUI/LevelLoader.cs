@@ -20,6 +20,7 @@ public class LevelLoader : MonoBehaviour {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
         loadingScreen.SetActive(true);
+        Time.timeScale = 1f;
 
         while (!operation.isDone)
         {

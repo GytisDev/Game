@@ -12,6 +12,10 @@ public class ScoreManager : MonoBehaviour
     public float TimeCurrent;
     public Slider scoreslider;
     public Slider timeslider;
+
+    public GameObject VictoryScreen;
+    public GameObject DefeatScreen;
+
     // Use this for initialization
     void Start()
     {
@@ -26,7 +30,7 @@ public class ScoreManager : MonoBehaviour
 
         TimeCurrent += Time.deltaTime;
 
-        if (TimeCurrent >= TimeLimit)
+        if ((TimeCurrent >= TimeLimit) || (ScoreCurrent >= ScoreGoal))
             GameOver();
         scoreslider.value = ScoreCurrent / ScoreGoal;
         timeslider.value = 1 - (TimeCurrent) / (TimeLimit);
@@ -48,11 +52,13 @@ public class ScoreManager : MonoBehaviour
     {
         if (ScoreCurrent < ScoreGoal)
         {
-            Debug.Log("Game Lost!");
+            Time.timeScale = 0f;
+            DefeatScreen.SetActive(true);
         }
         else
         {
-            Debug.Log("You win!");
+            Time.timeScale = 0f;
+            VictoryScreen.SetActive(true);
         }
     }
 }

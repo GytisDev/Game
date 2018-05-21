@@ -10,6 +10,11 @@ public class MainMenu : MonoBehaviour {
         SceneManager.LoadScene(scenename);
     }
 
+    private void Update()
+    {
+        Time.timeScale = 1f;
+    }
+
     public void Options()
     {
 
