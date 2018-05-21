@@ -17,7 +17,7 @@ public class FieldScript : MonoBehaviour {
     void Start() {
         stage = Stage.None;
         timer = 0;
-        growTime = Random.Range(40, 46);
+        growTime = Random.Range(35, 46);
     }
 
     // Update is called once per frame

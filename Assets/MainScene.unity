@@ -7548,10 +7548,13 @@ MonoBehaviour:
   woodtext: {fileID: 1594071949}
   stonetext: {fileID: 535212323}
   foodtext: {fileID: 356271043}
-  woodKoef: 0
-  stoneKoef: 0
-  foodKoef: 0
-  oneScorePointValue: 0
+  woodKoef: 2
+  stoneKoef: 4
+  foodKoef: 1
+  oneScorePointValue: 2
+  koefEnergyHouse: 1
+  koefEnergyFortress: 2
+  moon: {fileID: 346894396}
   wood: 500
   food: 100
   stone: 500
@@ -7584,6 +7587,8 @@ MonoBehaviour:
   green: {fileID: 1281952343}
   yellow: {fileID: 1679841278}
   red: {fileID: 568462964}
+  famineKillRate: 5
+  happiness: 0
 --- !u!114 &1544769961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7597,6 +7602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sun: {fileID: 941793496}
   Count: {fileID: 2108003696}
+  day: 0
 --- !u!114 &1551535276 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114985400749289038, guid: 52cae0f5716a33a47952af4a849971f8,

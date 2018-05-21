@@ -29,9 +29,17 @@ public class WoodCutterScript : MonoBehaviour {
         lastPos = gameObject.transform.position;
         unit = GetComponent<Unit>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void OnDestroy() {
+        wcc.ResetWork();
+
+        if(currenTree != null) {
+            currenTree.GetComponent<TreeScript>().available = true;
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
 
 
         if (citizen == null) return;

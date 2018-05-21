@@ -18,6 +18,7 @@ public class CameraTargetScript : MonoBehaviour
     public float maxY = 120f;
     public float minAngle = 40f;
     public float maxAngle = 90f;
+    bool isZero = false;
 
     Vector3 pos;
     float mapX, mapY, _heightKoef;
@@ -35,34 +36,38 @@ public class CameraTargetScript : MonoBehaviour
     void Update()
     {
         _heightKoef = Mathf.Pow(Camera.transform.position.y, 0.5f) * heightKoef;
+        float ts = Time.timeScale;
+        if(ts == 0) {
+            return;
+        } 
 
         if (Input.GetKey("w") || (Input.mousePosition.y >= Screen.height - panBorderThickness && panningWithMouse))
         {
             dir = transform.forward;
-            pos += dir * panSpeed * _heightKoef * Time.deltaTime;
+            pos += dir * panSpeed * _heightKoef * Time.deltaTime / ts;
         }
         if (Input.GetKey("d") || (Input.mousePosition.x >= Screen.width - panBorderThickness && panningWithMouse))
         {
             dir = transform.right;
-            pos += dir * panSpeed * _heightKoef * Time.deltaTime;
+            pos += dir * panSpeed * _heightKoef * Time.deltaTime / ts;
         }
         if (Input.GetKey("s") || (Input.mousePosition.y <= panBorderThickness && panningWithMouse))
         {
             dir = -transform.forward;
-            pos += dir * panSpeed * _heightKoef * Time.deltaTime;
+            pos += dir * panSpeed * _heightKoef * Time.deltaTime / ts;
         }
         if (Input.GetKey("a") || (Input.mousePosition.x <= panBorderThickness && panningWithMouse))
         {
             dir = -transform.right;
-            pos += dir * panSpeed * _heightKoef * Time.deltaTime;
+            pos += dir * panSpeed * _heightKoef * Time.deltaTime / ts;
         }
         if (Input.GetKey("e") || (Input.mousePosition.x <= panBorderThickness && panningWithMouse))
         {
-            transform.Rotate(Vector3.up, 150f * Time.deltaTime);
+            transform.Rotate(Vector3.up, 150f * Time.deltaTime / ts);
         }
         if (Input.GetKey("q") || (Input.mousePosition.x <= panBorderThickness && panningWithMouse))
         {
-            transform.Rotate(Vector3.down, 150f * Time.deltaTime);
+            transform.Rotate(Vector3.down, 150f * Time.deltaTime / ts);
         }
         //if (Input.GetMouseButtonDown(0))
         //{

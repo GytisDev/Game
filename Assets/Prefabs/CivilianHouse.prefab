@@ -111,6 +111,7 @@ MonoBehaviour:
   takesSpaceY: 2
   costWood: 100
   costStone: 0
+  scoreBonus: 80
   placed: 0
 --- !u!114 &114372134943570390
 MonoBehaviour:

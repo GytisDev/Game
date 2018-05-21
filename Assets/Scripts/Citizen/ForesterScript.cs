@@ -32,6 +32,13 @@ public class ForesterScript : MonoBehaviour {
         Radius = fhs.Radius;
     }
 
+    private void OnDestroy() {
+        fhs.ResetWork();
+        if (targetNode != null && (state == States.PathFinding || state == States.Working)) {
+            targetNode.walkable = true;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {

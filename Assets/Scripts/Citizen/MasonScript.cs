@@ -31,6 +31,14 @@ public class MasonScript : MonoBehaviour {
         unit = GetComponent<Unit>();
     }
 
+    private void OnDestroy() {
+        mhc.ResetWork();
+
+        if (currentRock != null) {
+            currentRock.GetComponent<RockScript>().available = true;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {

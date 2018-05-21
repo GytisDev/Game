@@ -6,7 +6,7 @@ public class WoodCutterHutController : MonoBehaviour {
 
     public GameObject InitialPosition;      // The position where citizen should initially come at work
     private bool citizenAsigned = false;
-    GameObject[] AsignedCitizens = new GameObject[1];
+    GameObject AsignedCitizen = null;
     ObjectOnGrid oog;
     bool statisticAdded;
 
@@ -24,8 +24,17 @@ public class WoodCutterHutController : MonoBehaviour {
         if (!citizenAsigned)
         {
             AsignCitizens();
+        } else {
+            if(AsignedCitizen == null) {
+                ResetWork();
+            }
         }
 	}
+
+    public void ResetWork() {
+        citizenAsigned = false;
+        AsignedCitizen = null;
+    }
 
     public void AsignCitizens()
     {
@@ -50,6 +59,7 @@ public class WoodCutterHutController : MonoBehaviour {
                     // Citizen goes to his workplace
                     Unit unit = citizen.GetComponent<Unit>();
                     unit.MoveTo(InitialPosition.transform.position);
+                    AsignedCitizen = citizen;
                 }
             }
         }

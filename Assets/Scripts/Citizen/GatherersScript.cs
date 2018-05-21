@@ -28,6 +28,14 @@ public class GatherersScript : MonoBehaviour {
         lastPos = gameObject.transform.position;
     }
 
+    private void OnDestroy() {
+        hut.ResetWork();
+
+        if (currentBush != null) {
+            currentBush.GetComponent<BerrieBushScript>().available = true;
+        }
+    }
+
     // Update is called once per frame
     void Update () {
         switch (state)

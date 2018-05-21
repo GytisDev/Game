@@ -6,6 +6,7 @@ public class GatherersHutController : MonoBehaviour {
 
     public GameObject InitialPosition;      // The position where citizen should initially come at work
     private bool citizenAsigned = false;
+    GameObject AsignedCitizen = null;
     ObjectOnGrid oog;
     bool statisticAdded;
 
@@ -27,6 +28,11 @@ public class GatherersHutController : MonoBehaviour {
         }
     }
 
+    public void ResetWork() {
+        citizenAsigned = false;
+        AsignedCitizen = null;
+    }
+
     public void AsignCitizens()
     {
         foreach (GameObject citizen in GameObject.FindGameObjectsWithTag("Citizen"))
@@ -39,6 +45,7 @@ public class GatherersHutController : MonoBehaviour {
                     citizenAsigned = true;
 
                     citizenScript.available = false;
+                    citizenScript.profession = CitizenScript.Professions.Gatherer;
 
                     // Add WoodCutterScript componenet to asigned citizen
                     citizen.AddComponent<GatherersScript>();

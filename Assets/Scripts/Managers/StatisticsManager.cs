@@ -13,5 +13,6 @@ public static class StatisticsManager {
     public static int MasonsHutCount = 0;
     public static int WarehouseCount = 0;
     public static int WoodCutterHutCount = 0;
+    public static int FortressCount = 0;
 
 }

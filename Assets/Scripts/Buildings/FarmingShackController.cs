@@ -10,7 +10,7 @@ public class FarmingShackController : MonoBehaviour {
     public List<FieldScript> Fields;
     private bool citizenAsigned = false;
     private bool landOccupied = false;
-    GameObject[] AsignedCitizens = new GameObject[1];
+    GameObject AsignedCitizen = null;
     Grid grid;
     ObjectOnGrid oog;
     bool statisticAdded;
@@ -41,6 +41,11 @@ public class FarmingShackController : MonoBehaviour {
         }
     }
 
+    public void ResetWork() {
+        citizenAsigned = false;
+        AsignedCitizen = null;
+    }
+
     public void AsignCitizens() {
         foreach (GameObject citizen in GameObject.FindGameObjectsWithTag("Citizen")) {
             if (!citizenAsigned) {
@@ -49,6 +54,7 @@ public class FarmingShackController : MonoBehaviour {
                     citizenAsigned = true;
 
                     citizenScript.available = false;
+                    citizenScript.profession = CitizenScript.Professions.Farmer;
 
                     // Add ForesterScript componenet to asigned citizen
                     citizen.AddComponent<FarmerScript>();

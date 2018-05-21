@@ -25,13 +25,20 @@ public class CameraRTS : MonoBehaviour
 
     private void Update()
     {
+        
+
+        float ts = Time.timeScale;
+
+        if (ts == 0)
+            return;
+
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
             pos = transform.position;
             if (pos.y > minY)
             {
-                offsetPosition.y -= scrollSpeed * Time.deltaTime;
-                offsetPosition.z += scrollSpeed * 0.5f * Time.deltaTime;
+                offsetPosition.y -= scrollSpeed * Time.deltaTime / ts;
+                offsetPosition.z += scrollSpeed * 0.5f * Time.deltaTime / ts;
             }
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
@@ -39,10 +46,10 @@ public class CameraRTS : MonoBehaviour
             pos = transform.position;
             if (pos.y < maxY)
             {
-                offsetPosition.y += scrollSpeed * Time.deltaTime;
-                offsetPosition.z -= scrollSpeed * 0.5f * Time.deltaTime;
+                offsetPosition.y += scrollSpeed * Time.deltaTime / ts;
+                offsetPosition.z -= scrollSpeed * 0.5f * Time.deltaTime / ts;
             }
-                pos -= transform.forward * scrollSpeed * Time.deltaTime;
+                pos -= transform.forward * scrollSpeed * Time.deltaTime / ts;
         }
 
         pos.y = Mathf.Clamp(pos.y, minY, maxY);

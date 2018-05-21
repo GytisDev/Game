@@ -15,8 +15,8 @@ public class FarmerScript : MonoBehaviour {
 
     public States state;
 
-    public float plantingTime = 4f;
-    public float cultivatingTime = 4f;
+    public float plantingTime = 1.5f;
+    public float cultivatingTime = 1.5f;
     public float cuttingTime = 2f;
     public float timerToWork = 0.5f;
 
@@ -29,6 +29,10 @@ public class FarmerScript : MonoBehaviour {
         unit = GetComponent<Unit>();
         fields = fsc.Fields;
         state = States.Available;
+    }
+
+    private void OnDestroy() {
+        fsc.ResetWork();
     }
 
     // Update is called once per frame

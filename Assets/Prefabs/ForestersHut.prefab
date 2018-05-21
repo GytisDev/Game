@@ -148,6 +148,7 @@ MonoBehaviour:
   takesSpaceY: 3
   costWood: 50
   costStone: 0
+  scoreBonus: 50
   placed: 0
 --- !u!114 &114876835647868220
 MonoBehaviour:
@@ -163,6 +164,7 @@ MonoBehaviour:
   InitialPosition: {fileID: 1108478171697300}
   YoungTree: {fileID: 1076194103083544, guid: 4c57728bd2da63a428b8e2ca4c28dec4, type: 2}
   Radius: 5
+  oog: {fileID: 0}
 --- !u!208 &208709941621735552
 NavMeshObstacle:
   m_ObjectHideFlags: 1

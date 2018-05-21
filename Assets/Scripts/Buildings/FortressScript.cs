@@ -11,45 +11,34 @@ public class FortressScript : MonoBehaviour
     public float[] Ranges = new float[] { 10f, 20f };
     public int Level = 1;
     private PopulationManager PopManager;
-    //public GameObject ActionsMenu;
-    //private bool aac = false;
+    private HappinessManager HappinessManager;
 
     private bool isplaced = false;
-    public float spawnTime = 5f;
+    private float spawnTime;
+    public float baseSpawnTime = 5f;
     public float currentSpawnTime = 0f;
     ObjectOnGrid oog;
     public bool spawnCitizens = true;
     private GameObject button;
+    bool statisticAdded = false;
 
     // Use this for initialization
     void Start()
     {
         oog = GetComponent<ObjectOnGrid>();
         PopManager = FindObjectOfType<PopulationManager>();
+        HappinessManager = FindObjectOfType<HappinessManager>();
+        spawnTime = baseSpawnTime;
     }
-
-    /*void OnMouseDown()
-    {
-        if (!oog.placed)
-            return;
-        if (!aac)
-        {
-            ActionsMenu.SetActive(true);
-            aac = true;
-        }
-        else
-        {
-            ActionsMenu.SetActive(false);
-            aac = false;
-        }
-    */
 
     // Update is called once per frame
     void Update()
     {
-
+        AdjustSpawnRate();
         if (!oog.placed)
             return;
+
+        if (!statisticAdded) { StatisticsManager.FortressCount++; statisticAdded = true; }
 
         if (!isplaced)
         {
@@ -72,6 +61,20 @@ public class FortressScript : MonoBehaviour
         }
 
         currentSpawnTime += Time.deltaTime;
+    }
+
+    public void AdjustSpawnRate() {
+        int happiness = HappinessManager.happiness;
+
+        if (happiness > 75) {
+            spawnTime = baseSpawnTime;
+        }
+        else if (happiness < 25) {
+            spawnTime = baseSpawnTime * 6;
+        }
+        else {
+            spawnTime = baseSpawnTime * 2;
+        }
     }
 
     void SpawnCitizens(int count)

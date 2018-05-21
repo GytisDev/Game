@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Daycount : MonoBehaviour {
     public GameObject Sun;
     public Text Count;
-    private int day;
+    public int day;
     private bool end;
 
 	// Use this for initialization

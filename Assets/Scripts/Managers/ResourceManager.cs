@@ -13,9 +13,14 @@ public class ResourceManager : MonoBehaviour {
     public int stoneKoef;
     public int foodKoef;
     public int oneScorePointValue;
+    public int koefEnergyHouse = 1;
+    public int koefEnergyFortress = 2;
     private int currentScoreAcc;
 
+    private float nightTimer = 0;
+
     private ScoreManager scoreManager;
+    public GameObject moon;
 
     public enum Resources {
         Wood,
@@ -43,6 +48,17 @@ public class ResourceManager : MonoBehaviour {
         stonetext.text = stone.ToString() + "\n/" + storage.ToString();
         foodtext.text = food.ToString() + "\n/" + storage.ToString();
 
+        if(moon.transform.position.y > 0) {
+
+            if(nightTimer > 10) {
+                DecreaseResources(Resources.Wood, koefEnergyHouse * StatisticsManager.CivilianBuildingCount + koefEnergyFortress * StatisticsManager.FortressCount);
+                nightTimer = 0;
+            }
+
+            nightTimer += Time.deltaTime;
+        } else {
+            nightTimer = 0;
+        }
     }
 
     public void IncreaseResources(Resources resource, int amount) {

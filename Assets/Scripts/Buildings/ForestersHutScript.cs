@@ -8,7 +8,7 @@ public class ForestersHutScript : MonoBehaviour {
     public GameObject YoungTree;
     public int Radius = 12;
     private bool citizenAsigned = false;
-    GameObject[] AsignedCitizens = new GameObject[1];
+    GameObject AsignedCitizen = null;
     public ObjectOnGrid oog;
     bool statisticAdded;
 
@@ -24,10 +24,19 @@ public class ForestersHutScript : MonoBehaviour {
 
         if (!statisticAdded) { StatisticsManager.ForestersHutCount++; statisticAdded = true; }
 
-        if (!citizenAsigned)
-        {
+        if (!citizenAsigned) {
             AsignCitizens();
         }
+        //else {
+        //    if (AsignedCitizen == null) {
+        //        ResetWork();
+        //    }
+        //}
+    }
+
+    public void ResetWork() {
+        citizenAsigned = false;
+        AsignedCitizen = null;
     }
 
     public void AsignCitizens()
@@ -42,7 +51,7 @@ public class ForestersHutScript : MonoBehaviour {
                     citizenAsigned = true;
 
                     citizenScript.available = false;
-
+                    citizenScript.profession = CitizenScript.Professions.Forester;
                     // Add ForesterScript componenet to asigned citizen
                     citizen.AddComponent<ForesterScript>();
                     ForesterScript fs = citizen.GetComponent<ForesterScript>();
