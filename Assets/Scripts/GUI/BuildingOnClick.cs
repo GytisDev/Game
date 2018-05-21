@@ -40,13 +40,13 @@ public class BuildingOnClick : MonoBehaviour {
 
     public void HoverEnter()
     {
-        info.SetActive(true);
+        info.transform.localScale = new Vector3(3, 1, 1);
         infobar.text = message;
     }
 
     public void HoverExit()
     {
-        info.SetActive(false);
+        info.transform.localScale = new Vector3(0, 0, 0);
         infobar.text = "";
     }
 

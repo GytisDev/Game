@@ -1,9 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FortressScript : MonoBehaviour
 {
+
+    public GameObject info;
+    public Text infobar;
+    string message;
+    public int upcostwood;
+    public int upcoststone;
 
     public Transform citizen;
     public int citizenCount;
@@ -12,6 +19,8 @@ public class FortressScript : MonoBehaviour
     public int Level = 1;
     private PopulationManager PopManager;
     private HappinessManager HappinessManager;
+    public GameObject ActionsMenu;
+    private bool aac = false;
 
     private bool isplaced = false;
     private float spawnTime;
@@ -20,15 +29,19 @@ public class FortressScript : MonoBehaviour
     ObjectOnGrid oog;
     public bool spawnCitizens = true;
     private GameObject button;
+
     bool statisticAdded = false;
+    ResourceManager rm;
 
     // Use this for initialization
     void Start()
     {
         oog = GetComponent<ObjectOnGrid>();
+        rm = FindObjectOfType<ResourceManager>();
         PopManager = FindObjectOfType<PopulationManager>();
         HappinessManager = FindObjectOfType<HappinessManager>();
         spawnTime = baseSpawnTime;
+        message = "Fortress Upgrade\n" + upcostwood + " Wood " + upcoststone + " Stone";
     }
 
     // Update is called once per frame
@@ -63,6 +76,7 @@ public class FortressScript : MonoBehaviour
         currentSpawnTime += Time.deltaTime;
     }
 
+
     public void AdjustSpawnRate() {
         int happiness = HappinessManager.happiness;
 
@@ -74,6 +88,22 @@ public class FortressScript : MonoBehaviour
         }
         else {
             spawnTime = baseSpawnTime * 2;
+		}
+	}
+    public void OnMouseDown()
+    {
+        if (!oog.placed)
+            return;
+        if ((!aac) && (Level < 3))
+        {
+            ActionsMenu.SetActive(true);
+            aac = true;
+        }
+        else
+        {
+            ActionsMenu.SetActive(false);
+            aac = false;
+
         }
     }
 
@@ -83,5 +113,31 @@ public class FortressScript : MonoBehaviour
         {
             Instantiate(citizen, SpawnPosition.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
         }
+    }
+
+    public void Upgrade()
+    {
+        if ((Level < 3))
+        {
+            if (rm.isEnough(upcostwood, upcoststone, 0))
+            {
+                rm.DecreaseResources(ResourceManager.Resources.Wood, upcostwood);
+                rm.DecreaseResources(ResourceManager.Resources.Stone, upcoststone);
+                Level++;
+            }
+
+        }
+    }
+
+    public void HoverEnter()
+    {
+        info.transform.localScale = new Vector3(3, 1, 1);
+        infobar.text = message;
+    }
+
+    public void HoverExit()
+    {
+        info.transform.localScale = new Vector3(0, 0, 0);
+        infobar.text = "";
     }
 }
