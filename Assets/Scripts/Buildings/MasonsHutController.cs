@@ -6,7 +6,7 @@ public class MasonsHutController : MonoBehaviour {
 
     public GameObject InitialPosition;      // The position where citizen should initially come at work
     private bool citizenAsigned = false;
-    GameObject AsignedCitizen = null;
+    //GameObject AsignedCitizen = null;
     ObjectOnGrid oog;
     bool statisticAdded;
 
@@ -31,7 +31,7 @@ public class MasonsHutController : MonoBehaviour {
 
     public void ResetWork() {
         citizenAsigned = false;
-        AsignedCitizen = null;
+        //AsignedCitizen = null;
     }
 
     public void AsignCitizens()
@@ -41,7 +41,7 @@ public class MasonsHutController : MonoBehaviour {
             if (!citizenAsigned)
             {
                 CitizenScript citizenScript = citizen.GetComponent<CitizenScript>();
-                if (citizenScript.available)
+                if (citizenScript.available && citizenScript.profession == CitizenScript.Professions.Unemployeed)
                 {
                     citizenAsigned = true;
 

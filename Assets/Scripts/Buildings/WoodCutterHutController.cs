@@ -43,7 +43,7 @@ public class WoodCutterHutController : MonoBehaviour {
             if (!citizenAsigned)
             {
                 CitizenScript citizenScript = citizen.GetComponent<CitizenScript>();
-                if (citizenScript.available)
+                if (citizenScript.available && citizenScript.profession == CitizenScript.Professions.Unemployeed)
                 {
                     citizenAsigned = true;
 
