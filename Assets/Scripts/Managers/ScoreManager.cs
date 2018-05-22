@@ -16,9 +16,14 @@ public class ScoreManager : MonoBehaviour
     public GameObject VictoryScreen;
     public GameObject DefeatScreen;
 
+    PopulationManager popm;
+    ResourceManager rm;
+
     // Use this for initialization
     void Start()
     {
+        rm = FindObjectOfType<ResourceManager>();
+        popm = FindObjectOfType<PopulationManager>();
         ScoreCurrent = 0;
         TimeCurrent = 0;
         //timemin = 0;
@@ -30,7 +35,7 @@ public class ScoreManager : MonoBehaviour
 
         TimeCurrent += Time.deltaTime;
 
-        if ((TimeCurrent >= TimeLimit) || (ScoreCurrent >= ScoreGoal))
+        if ((TimeCurrent >= TimeLimit) || (ScoreCurrent >= ScoreGoal) || (popm.population == 0 && rm.food == 0))
             GameOver();
         scoreslider.value = ScoreCurrent / ScoreGoal;
         timeslider.value = 1 - (TimeCurrent) / (TimeLimit);

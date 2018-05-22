@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class TreeScript : MonoBehaviour {
 
@@ -9,8 +10,9 @@ public class TreeScript : MonoBehaviour {
     public float scale;
     public float growrate;
     bool grown;
+
     // Use this for initialization
-	void Start () {
+    void Start () {
         //available = false;
         //grown = false;
     }
@@ -39,6 +41,7 @@ public class TreeScript : MonoBehaviour {
 
     public int Chop(int quantity)
     {
+        
         if (quantity > woodLeft)
             quantity = woodLeft;
         woodLeft -= quantity;

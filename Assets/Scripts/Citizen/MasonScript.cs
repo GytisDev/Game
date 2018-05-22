@@ -20,6 +20,7 @@ public class MasonScript : MonoBehaviour {
     bool noRocksInArea = false;
     GameObject currentRock;
     Unit unit;
+    SoundManager sm;
 
     Vector3 lastPos, currentPos;
 
@@ -29,6 +30,8 @@ public class MasonScript : MonoBehaviour {
         rm = FindObjectOfType<ResourceManager>();
         lastPos = gameObject.transform.position;
         unit = GetComponent<Unit>();
+        sm = FindObjectOfType<SoundManager>();
+
     }
 
     private void OnDestroy() {
@@ -77,6 +80,9 @@ public class MasonScript : MonoBehaviour {
 
                 if (ArrivedAtTarget(currentRock))
                 {
+                    AudioSource audio = currentRock.GetComponent<AudioSource>();
+                    audio.volume = sm.volume;
+                    audio.Play();
                     state = States.Working;
                     //Debug.Log("Arived at the rock");
                 }

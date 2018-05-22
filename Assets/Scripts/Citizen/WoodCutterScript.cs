@@ -20,6 +20,7 @@ public class WoodCutterScript : MonoBehaviour {
     bool noTreesInArea = false;
     GameObject currenTree;
     Unit unit;
+    SoundManager sm;
 
     Vector3 lastPos, currentPos;
 
@@ -28,7 +29,8 @@ public class WoodCutterScript : MonoBehaviour {
         rm = FindObjectOfType<ResourceManager>();
         lastPos = gameObject.transform.position;
         unit = GetComponent<Unit>();
-	}
+        sm = FindObjectOfType<SoundManager>();
+    }
 
     private void OnDestroy() {
         wcc.ResetWork();
@@ -79,6 +81,9 @@ public class WoodCutterScript : MonoBehaviour {
                 if (ArrivedAtTarget(currenTree))
                 {
                     state = States.Working;
+                    AudioSource audio = currenTree.GetComponent<AudioSource>();
+                    audio.volume = sm.volume;
+                    audio.Play();
                     //Debug.Log("Arived at tree");
                 }
                 else

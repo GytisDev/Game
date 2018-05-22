@@ -14,12 +14,18 @@ public class FarmingShackController : MonoBehaviour {
     Grid grid;
     ObjectOnGrid oog;
     bool statisticAdded;
+    SoundManager sm;
+    AudioSource audio;
+    float audiotimer;
 
     private void Start() {
         grid = FindObjectOfType<Grid>();
         Fields = new List<FieldScript>();
         oog = gameObject.GetComponent<ObjectOnGrid>();
+        sm = FindObjectOfType<SoundManager>();
         statisticAdded = false;
+        audio = GetComponent<AudioSource>();
+        audiotimer = 0;
     }
 
     // Update is called once per frame
@@ -27,6 +33,14 @@ public class FarmingShackController : MonoBehaviour {
         if (!oog.placed) return;
 
         if (!statisticAdded) { StatisticsManager.FarmingShackCountr++; statisticAdded = true; }
+
+        audiotimer += Time.deltaTime;
+        audio.volume = sm.volume;
+        if (audiotimer >= 24)
+        {
+            audio.Play();
+            audiotimer = 0;
+        }
 
         if (!landOccupied && oog.placed) {
             landOccupied = true;
