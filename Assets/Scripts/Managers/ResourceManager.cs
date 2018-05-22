@@ -35,7 +35,7 @@ public class ResourceManager : MonoBehaviour {
 	void Start () {
         UpdateFormat();
         scoreManager = FindObjectOfType<ScoreManager>();
-        currentScoreAcc = 0;
+        currentScoreAcc = 0;                                                                                                                                                                                                                                                                    
         if (woodKoef == 0) woodKoef = 1;
         if (stoneKoef == 0) stoneKoef = 1;
         if (foodKoef == 0) foodKoef = 1;
@@ -77,15 +77,18 @@ public class ResourceManager : MonoBehaviour {
         switch (resource) {
             case Resources.Wood:
                 wood += amount;
+                if (wood < 0) wood = 0;
                 if(amount > 0) currentScoreAcc += amount * woodKoef;
                 break;
             case Resources.Food:
                 food += amount;
                 if (amount > 0) currentScoreAcc += amount * foodKoef;
+                if (food < 0) food = 0;
                 break;
             case Resources.Stone:
                 stone += amount;
                 if (amount > 0) currentScoreAcc += amount * stoneKoef;
+                if (stone < 0) stone = 0;
                 break;
             case Resources.Storage:
                 storage += amount;

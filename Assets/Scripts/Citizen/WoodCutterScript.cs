@@ -54,11 +54,6 @@ public class WoodCutterScript : MonoBehaviour {
                 break;
 
             case States.Available:
-                //if (rm.noTrees) return;
-                //if (!hasWorkToDo)
-                //{
-                //    Work();
-                //}
                 if (hasWorkToDo) return;
                 if (!noTreesInArea)
                     Work();

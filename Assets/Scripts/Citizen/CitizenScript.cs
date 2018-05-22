@@ -44,7 +44,7 @@ public class CitizenScript : MonoBehaviour {
             }
             //else Destroy(this);
         }
-        if (age > 300) Destroy(this);
+        //if (age > 300) Destroy(this);
     }
 
 
