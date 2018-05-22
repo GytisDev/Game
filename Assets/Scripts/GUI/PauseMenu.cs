@@ -48,6 +48,11 @@ public class PauseMenu : MonoBehaviour {
         Time.timeScale = 1f;
     }
 
+    public void SetFullscreen (bool isFullscreen)
+    {
+        Screen.fullScreen = !Screen.fullScreen;
+    }
+
     public void QuitGame()
     {
         Debug.Log("Quitting game...");

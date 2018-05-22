@@ -15,9 +15,9 @@ public class MainMenu : MonoBehaviour {
         Time.timeScale = 1f;
     }
 
-    public void Options()
+    public void SetFullscreen(bool isFullscreen)
     {
-
+        Screen.fullScreen = !Screen.fullScreen;
     }
 
     public void QuitGame()
