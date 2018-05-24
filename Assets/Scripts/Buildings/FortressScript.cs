@@ -29,6 +29,7 @@ public class FortressScript : MonoBehaviour
     ObjectOnGrid oog;
     public bool spawnCitizens = true;
     private GameObject button;
+    private GameObject amenu;
 
     bool statisticAdded = false;
     ResourceManager rm;
@@ -56,7 +57,9 @@ public class FortressScript : MonoBehaviour
         if (!isplaced)
         {
             button = GameObject.FindWithTag("FortressButton");
+            amenu = GameObject.FindWithTag("ActionsMenu");
             button.SetActive(false);
+            amenu.transform.localScale = new Vector3(1, 1, 1);
             isplaced = true;
         }
 

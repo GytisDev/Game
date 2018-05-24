@@ -10,6 +10,7 @@ TagManager:
   - BerryBush
   - Rock
   - FortressButton
+  - ActionsMenu
   layers:
   - Default
   - TransparentFX
