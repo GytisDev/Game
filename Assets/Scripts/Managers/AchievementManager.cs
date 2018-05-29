@@ -47,6 +47,8 @@ public class AchievementManager : MonoBehaviour {
             if ((ach.Done == false) && (entrycount <= 9))
             {
                 AchievementsText.text += "-" + ach.Description + "\n";
+                if (ach.ScoreBonus != 0) AchievementsText.text += "Score Bonus: " + ach.ScoreBonus + "\n";
+                if (ach.TimeBonus != 0) AchievementsText.text += "Time Bonus: " + ach.TimeBonus + "\n";
                 entrycount++;
             }
         }
