@@ -3131,7 +3131,7 @@ GameObject:
   - component: {fileID: 614821060}
   m_Layer: 0
   m_Name: User Interface
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5296,6 +5296,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayGridGizmos: 1
+  Objects:
+  - {fileID: 1130190130904562, guid: 6e62d866fa5c2ce429aaed27ff9e6c8d, type: 2}
+  - {fileID: 1752161905464204, guid: f2673f5e4af95274eab4562b04ce3581, type: 2}
+  - {fileID: 1250399867202540, guid: 18b941e032ec1a34ba36bec3fc37d0cd, type: 2}
+  - {fileID: 1999070103311584, guid: 26d05ff0457b98b4a985a3c08fe97686, type: 2}
+  - {fileID: 1811963768538502, guid: 7f75fc5074a8c514d859e7348c0a4ab7, type: 2}
+  - {fileID: 1265414524142958, guid: 72b2efbfa34fe4245a3d88ee2902d0d4, type: 2}
+  - {fileID: 1700021960466360, guid: 73fd423f32eec934491a3091f13eab0c, type: 2}
+  - {fileID: 1792079430891212, guid: d46a380e1c827ae40a654146f97d2185, type: 2}
+  - {fileID: 1262284124019650, guid: 7bfb4aa76289ea64fb13db15e76166a5, type: 2}
+  - {fileID: 1201504358866766, guid: c869c26d70dcb06439b9310857f7b2e6, type: 2}
+  - {fileID: 1674792185304410, guid: bf29d5ea9b632cd4aa91f5bade0385c1, type: 2}
+  - {fileID: 1717061167582080, guid: c899047ffd11d0343ae269033b0fde75, type: 2}
+  - {fileID: 1906929491733382, guid: 31c75969cdfee72488860cc7307d0202, type: 2}
+  - {fileID: 1951810263286766, guid: a84f8685dd6237a4bad80bdedca31b3c, type: 2}
+  - {fileID: 1759729258057802, guid: 1c4d32c0be9afd544bd0b768aaef9f94, type: 2}
   playerPosition: {fileID: 0}
   gridWorldSize: {x: 250, y: 250}
   nodeRadius: 1
@@ -7545,7 +7561,7 @@ MonoBehaviour:
   koefEnergyFortress: 2
   moon: {fileID: 346894396}
   wood: 500
-  food: 100
+  food: 150
   stone: 500
   storage: 500
 --- !u!114 &1544769959
@@ -10972,6 +10988,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2133997463}
   - component: {fileID: 2133997462}
+  - component: {fileID: 2133997464}
   m_Layer: 0
   m_Name: GameControler
   m_TagString: Untagged
@@ -11031,3 +11048,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2133997464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2133997461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e845e8a70a8bc14083f96b723a1a224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

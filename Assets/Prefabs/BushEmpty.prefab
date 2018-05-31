@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 208893159142175468}
   m_Layer: 0
   m_Name: BushEmpty
-  m_TagString: Untagged
+  m_TagString: EmptyBush
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,6 +147,7 @@ MonoBehaviour:
   takesSpaceY: 1
   costWood: 0
   costStone: 0
+  scoreBonus: 0
   placed: 1
 --- !u!208 &208893159142175468
 NavMeshObstacle:

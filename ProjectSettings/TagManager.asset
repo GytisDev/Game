@@ -10,6 +10,18 @@ TagManager:
   - BerryBush
   - Rock
   - FortressButton
+  - Grass
+  - Sand
+  - EmptyBush
+  - CivilHouse
+  - FarmShelter
+  - MainBuilding
+  - Gatherer
+  - Forester
+  - WareHouse
+  - WoodCutter
+  - Mason
+  - UI
   layers:
   - Default
   - TransparentFX

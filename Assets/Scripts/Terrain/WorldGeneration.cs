@@ -114,7 +114,7 @@ public class WorldGeneration : MonoBehaviour {
                         for (int i = -1; i <= 1; i++) {
                             for (int j = -1; j <= 1; j++) {
                                 if(grid.IsWalkable(x + i, y + j) && Random.Range(0, 100) > 50) {
-                                    Instantiate(rock, grid.GetNodePosition(x + i, y + j) + new Vector3(0, 0.5f, 0), Quaternion.Euler(new Vector3(0, Random.Range(0f, 180f), 0)), parent);
+                                    Instantiate(rock, grid.GetNodePosition(x + i, y + j) + new Vector3(0, 0.5f, 0), Quaternion.Euler(new Vector3(0, Random.Range(0f, 180f), 0)), parent).GetComponent<ObjectOnGrid>().SetNodes(new Node[,] { { grid.GetNode(x + i, y + j) } });
                                     grid.SetOccupied(x + i, y + j);
                                 }
                             }

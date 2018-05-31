@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 65654532025781842}
   m_Layer: 0
   m_Name: MainBuilding
-  m_TagString: Untagged
+  m_TagString: MainBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -229,7 +229,7 @@ MonoBehaviour:
   - 80
   Level: 1
   ActionsMenu: {fileID: 1509948009838248}
-  spawnTime: 5
+  baseSpawnTime: 5
   currentSpawnTime: 0
   spawnCitizens: 1
 --- !u!114 &114049581622783212

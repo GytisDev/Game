@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 208465673030209348}
   m_Layer: 8
   m_Name: WoodCutterHut
-  m_TagString: Untagged
+  m_TagString: WoodCutter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

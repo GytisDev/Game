@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 82923645148257204}
   m_Layer: 0
   m_Name: FarmingShack
-  m_TagString: Untagged
+  m_TagString: FarmShelter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

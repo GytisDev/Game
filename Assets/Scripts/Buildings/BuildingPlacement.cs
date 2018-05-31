@@ -119,6 +119,11 @@ public class BuildingPlacement : MonoBehaviour {
         }
     }
 
+    public void OnDestroy()
+    {
+        indicatorsCreated = false;
+    }
+
     private Vector3 RoundTransform(Vector3 v, float snapValue) {
         return new Vector3
         (
